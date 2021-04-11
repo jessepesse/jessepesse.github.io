@@ -132,7 +132,7 @@ button {
 
 .square {
   padding-top: 4em;
-  font-size: 1rem;
+  font-size: 1.3rem;
   height: 10em;
   margin: 0em 0em;
   text-align: center;
@@ -140,7 +140,7 @@ button {
 
 .square-header {
   font-family: 'Slabo 13px', serif;
-  font-size: 1.1rem;
+  font-size: 2rem;
   font-weight: 600;
   color: #fff;
   margin: 0em 0em 0em 0em;
@@ -194,7 +194,7 @@ h1.timing {
 
 .square {
   padding: 1.5em;
-  padding-top: 150px;
+  padding-top: 140px;
   font-size: 0.8rem;
   width: auto;
   margin: 0em 0em;
@@ -203,7 +203,7 @@ h1.timing {
 
 .square-header {
   font-family: 'Slabo 13px', serif;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
   color: #fff;
   margin: 0em 0em 0em 0em;
@@ -244,8 +244,8 @@ form:hover{
 
 }
 
-@media only screen and (max-width: 1500px) {
+/* @media only screen and (max-width: 1500px) {
   .square {
     padding-top: 110px;
   }
-}
+} */
