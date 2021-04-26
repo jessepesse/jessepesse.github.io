@@ -1,0 +1,57 @@
+/* Tekijä: Jesse Saarinen / TIK21KM */
+@import url('https://fonts.googleapis.com/css2?family=Mulish&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap');
+
+/* Fonttie määritys */
+h2 {
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 3em;
+    color: #4fa32a;
+}
+
+h3 {
+    font-family: 'Amatic SC', cursive;
+    font-size: 2.5em;
+    color: #005f47;
+}
+
+.fa-globe {
+    color: #4fa32a;
+}
+
+p {
+    font-family: 'Mulish', sans-serif;
+}
+
+.oikein {
+    font-weight: bold;
+    font-size: 2em;
+}
+
+
+/* Elementtien piilotus */
+.hidden {
+    display: none;
+}
+
+/* Oikea vastauksen tyyli */
+.selected {
+    background-color: #00705a;
+    border-radius: 6px;
+}
+
+/* Väärän vastauksen tyyli */
+.selected_wrong {
+    background-color: rgb(255, 0, 179);
+    border-radius: 6px;
+}
+
+
+.img-fluid {
+    width: 40%;
+}
+
+.btn {
+    background-color: #4fa32a;
+}

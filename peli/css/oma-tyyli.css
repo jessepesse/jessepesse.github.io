@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Snowburst+One&display=swap" rel="stylesheet"');
+@import url('https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap');
+
+body {
+    background-color: #EBF7E3;
+}
+
+header {
+    background-color: #66B042;
+}   
+
+.nav-link {
+    font-family: 'New Tegomin', serif;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+section {
+    background-color: #EBF7E3;
+}
+
+h1 {
+    font-family: 'Snowburst One', cursive;
+}
+
+section {
+    padding-bottom: 8em;
+}
+
+footer {
+    background-color: #49c760;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+
+
