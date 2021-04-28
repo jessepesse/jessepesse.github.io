@@ -24,6 +24,19 @@ p {
     font-family: 'Mulish', sans-serif;
 }
 
+.form-check-input:hover {
+    background-color: #ccc;
+}
+
+.form-check-label {
+    color: #000;
+    font-size: 16px;
+}
+
+.form-check-label:hover {
+    color: #4fa32a;
+}
+
 .oikein {
     font-weight: bold;
     font-size: 2em;
@@ -52,6 +65,21 @@ p {
     width: 40%;
 }
 
+.palkinnot {
+    width: 20%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .btn {
     background-color: #4fa32a;
 }
+
+/* Määrittelyt eri kokoisille ruuduille */
+@media screen and (max-width: 500px) {
+   .palkinnot {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+  }

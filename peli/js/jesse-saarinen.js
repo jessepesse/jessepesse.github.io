@@ -2,7 +2,7 @@
 /// <reference path="jquery-3.6.0.min.js" />
 
 $(function () {
-  // tähän kirjoitetaan js-koodi
+
 
   let oikein = 0;
   let vastattu = 0;
@@ -14,7 +14,6 @@ $(function () {
     if (valittu === "1") {
       oikein = oikein + 1;
       vastattu = vastattu + 1;
-      $("#oikein").html("Sait oikein: " + oikein + " / 5");
       $(this).next().addClass('selected')
       $(this).next().next().slideToggle(1000)
     } else {
@@ -25,6 +24,7 @@ $(function () {
     }
     $("[name=kysymys1]").prop("disabled", true);
     $("#info1").slideDown(1000);
+    $("#tarkista2").html("")
   })
 
   // Toisen kysymyksen js-koodi
@@ -34,7 +34,6 @@ $(function () {
     if (valittu === "1") {
       oikein = oikein + 1;
       vastattu = vastattu + 1;
-      $("#oikein").html("Sait oikein: " + oikein + " / 5");
       $(this).next().addClass('selected')
       $(this).next().next().slideToggle(1000)
     } else {
@@ -45,6 +44,7 @@ $(function () {
     }
     $("[name=kysymys2]").prop("disabled", true);
     $("#info2").slideDown(1000);
+    $("#tarkista2").html("")
   })
 
   // Kolmannen kysymyksen js-koodi
@@ -54,7 +54,6 @@ $(function () {
     if (valittu === "1") {
       oikein = oikein + 1;
       vastattu = vastattu + 1;
-      $("#oikein").html("Sait oikein: " + oikein + " / 5");
       $(this).next().addClass('selected')
       $(this).next().next().slideToggle(1000)
     } else {
@@ -65,6 +64,7 @@ $(function () {
     }
     $("[name=kysymys3]").prop("disabled", true);
     $("#info3").slideDown(1000);
+    $("#tarkista2").html("")
   })
 
   // Neljännen kysymyksen js-koodi
@@ -74,7 +74,6 @@ $(function () {
     if (valittu === "1") {
       oikein = oikein + 1;
       vastattu = vastattu + 1;
-      $("#oikein").html("Sait oikein: " + oikein + " / 5");
       $(this).next().addClass('selected')
       $(this).next().next().slideToggle(1000)
     } else {
@@ -85,15 +84,16 @@ $(function () {
     }
     $("[name=kysymys4]").prop("disabled", true);
     $("#info4").slideDown(1000);
+    $("#tarkista2").html("")
   })
 
+  // Viidennen kysymyksen js-koodi
   $('.kysymys5').on('click', function () {
     let valittu = $('[name=kysymys5]:checked').val()
 
     if (valittu === "1") {
       oikein = oikein + 1;
       vastattu = vastattu + 1;
-      $("#oikein").html("Sait oikein: " + oikein + " / 5");
       $(this).next().addClass('selected')
       $(this).next().next().slideToggle(1000)
     } else {
@@ -104,22 +104,33 @@ $(function () {
     }
     $("[name=kysymys5]").prop("disabled", true);
     $("#info5").slideDown(1000);
+    $("#tarkista2").html("")
   })
 
-
+  // Vastausten tarkistuksen click-tapahtuma
   $("#tarkista").on('click', function(){
+    $("#tarkista2").html("")
 
-     if (vastattu === 5) {
+    if (vastattu === 5) {
     $(this).addClass('hidden');
-    $("[name=kysymykset]").addClass('hidden');
+    $("#oikein").html("Sait oikein: " + oikein + " / 5");
+    $("[name=kysymykset]").slideUp(2000);
     $("#oikein").removeClass('hidden');
     $("#uusi").removeClass('hidden');
-  }
+    if (oikein === 5) {
+      $("#palkinnot").append("<img class='img-fluid' src='img/award-1.png'/>")
+    } if (oikein === 4) { 
+      $("#palkinnot").append("<img class='img-fluid' src='img/award-2.png'/>")
+      } if (oikein === 3) { 
+        $("#palkinnot").append("<img class='img-fluid' src='img/award-3.png'/>")
+      }
+    } else {
+      $("#tarkista2").html("Et vielä vastannut kaikkiin kysymyksiin!");
+    }
   })
  
+  // Yritä uudelleen click-tapahtuma
   $("#uusi").on('click', function(){
     location.reload();
   })
-
-
 })
