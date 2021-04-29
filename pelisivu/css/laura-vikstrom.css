@@ -1,0 +1,55 @@
+/* Laura Vikström   TIK21KM */
+
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+/* Otsikkomuotoilua */
+h2,
+h3 {
+    margin-top: 1.5em;
+    color: #663d00;
+    font-family: 'Permanent Marker', cursive;
+}
+
+/* Visaa edeltävän tekstin muotoilua */
+.pelementti {
+    max-width: 60ch;
+    margin: 0 auto !important;  
+}
+
+.fa-leaf {
+    color: #e68a00;
+}
+
+form {
+    padding-left: 2.5em;
+}
+
+.btn {
+    margin-left: 10em;
+}
+
+img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+/* Piilotettujen elementtien muotoilua */
+.hided {
+    display: none;
+}
+
+/* Väärin valitun radiobuttonin tekstin muotoilu */
+.selected {
+    background-color: #ff0000;
+    border-radius: 5px;
+    padding-left: 6px;
+    padding-right: 7px;
+}
+
+/* Oikein valitun radiobuttonin tekstin muotoilu */
+.selected_c {
+    background-color: #008000;
+    border-radius: 5px;
+    padding-left: 6px;
+    padding-right: 7px;
+}

@@ -123,6 +123,8 @@ $(function () {
       $("#palkinnot").append("<img class='img-fluid' src='img/award-2.png'/>")
       } if (oikein === 3) { 
         $("#palkinnot").append("<img class='img-fluid' src='img/award-3.png'/>")
+      } if (oikein < 3) {
+        $("#palkinnot2").removeClass('hidden');
       }
     } else {
       $("#tarkista2").html("Et vielä vastannut kaikkiin kysymyksiin!");

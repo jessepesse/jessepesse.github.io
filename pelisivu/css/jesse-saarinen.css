@@ -1,4 +1,5 @@
 /* Tekijä: Jesse Saarinen / TIK21KM */
+
 @import url('https://fonts.googleapis.com/css2?family=Mulish&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap');
@@ -18,6 +19,11 @@ h3 {
 
 .fa-globe {
     color: #4fa32a;
+}
+
+.fa-frown-o {
+    font-size: 100px;
+    color: rgb(182, 0, 0);
 }
 
 p {
@@ -73,6 +79,11 @@ p {
 
 .btn {
     background-color: #4fa32a;
+}
+
+.btn:hover {
+    background-color: #000000;
+    color:rgb(255, 255, 255)
 }
 
 /* Määrittelyt eri kokoisille ruuduille */

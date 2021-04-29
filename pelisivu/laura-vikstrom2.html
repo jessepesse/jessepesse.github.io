@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Laura Vikström">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" 
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" 
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="css/oma-tyyli.css">
+    <link rel="stylesheet" href="css/laura-vikstrom2.css">
+    <title>Web-projekti</title>
+</head>
+
+<!-- 
+    Tulosta span-elementin id:llä p-elementin sisältö
+-->
+
+<body>
+    <main class="container-fluid">
+       <header class="row"> 
+           <div class="col p-3">
+                <h1>Pelisivu <i class="fa fa-gamepad" aria-hidden="true"></i></h1>
+            </div>
+            <div class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                    <a class="navbar-brand"></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" 
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                      <a class="nav-link" href="index.html">Etusivu</a>
+                      <a class="nav-link" href="tietoja.html">Tietoja</a>
+                      <a class="nav-link" href="henrik-korpi.html">Avaruusvisa</a>
+                      <a class="nav-link" href="laura-vikstrom.html">Luontovisa</a>
+                      <a class="nav-link" href="anne-korhonen.html">Anne</a>
+                      <a class="nav-link" href="kaisa-koivisto.html">Koivisto</a>
+                      <a class="nav-link" href="jesse-saarinen.html">Maantietovisa</a>
+                      <a class="nav-link active" aria-current="page" href="laura-vikstrom2.html">Kirjallisuusvisa</a>
+                      <a class="nav-link" href="kaisa-koivisto2.html">Matikkavisa</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="row text-center ms-5 me-5">
+            <div class="col-12" id="general">
+                <h2 class="mt-5">Kirjallisuusvisa</h2>
+                <p class="pelementti pb-2">Kirjallisuusvisassa on viisi kirjallisuuteen liittyvää kysymystä. Jokaiseen 
+                    kysymykseen on vain yksi oikea vastaus. Vastausvaihtoehdot näet kysymysten alla. 
+                    Kirjoita oikea vaihtoehto vastausvaihtoehtojen alla laatikkoon.</p>
+
+                <p class="pelementti pb-2"><span class="fw-bolder">Mieti tarkkaan ennen kuin vastaat.</span> Oikeinkirjoitus on osa 
+                    kirjallisuutta ja sen vuoksi myös vastauksia kirjoittaessa on hyvä muistaa olla tarkkana! Muista eritoten
+                    isot ja pienet kirjaimet, pisteet ja välilyönnit.</p>
+
+                <p class="pelementti pb-2">Kysymyksiin vastataan kysymysten numerojärjestyksessä. Kun olet vastannut ensimmäiseen 
+                    kysymykseen, toisen kysymyksen vastauslaatikko aukeaa.</p>
+                <p class="fontti2">Menestystä visaan!</p>
+            </div>
+
+            <form>
+            <div class="col-12 mt-5" id="tolkienid">
+                <h3>1. Kuka on kirjoittanut kirjan <span class="text-decoration-underline">Taru Sormusten 
+                    Herrasta</span>?</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">Enid Blyton</li>
+                    <li class="list-group-item">J. R. R. Tolkien</li>
+                    <li class="list-group-item">Stephen King</li>
+                    <li class="list-group-item mb-2">Scott Lynch </li>
+                </ul>
+                <div class="col-3 inputkentta border-top border-dark pt-3">
+                    <label for="vastaus1" class="form-label painike fs-5">Vastauksesi:</label>
+                    <i aria-hidden="true"></i>
+                    <input type="text" class="form-control text-center" id="vastaus1" placeholder="Kirjoita vastauksesi tähän.">
+                  </div>
+                  <div>
+                    <button type="button" class="btn btn-dark text-light mb-4 mt-3 painike" id="vastaus1_painike">
+                      <i aria-hidden="true"></i>
+                      Vastaa</button>
+                  </div>
+                  <div class="row">
+                      <p class="col-12 text-center" id="tolkien_answer">Vastauksesi on <span id="tolkien_answer2">...</span></p>
+                      <p class="hided col-12 fontti2 pelementti" id="tolkien1">"Varsinaisen läpimurtonsa Tolkien teki 60-luvulla, jolloin 
+                        hänen Hobitin jatkoksi kirjoittamansa tuhatsivuinen fantasiajärkäle Taru Sormusten herrasta (1954­–55) 
+                        herätti vastakaikua amerikkalaisilla yliopistokampuksilla."</p>
+                        <address class="hided col-12" id="tolkien2">Lähde: <a href="https://www.wsoy.fi/kirjailija/j.-r.-r.-tolkien"
+                        target="_blank">WSOY: J. R. R. Tolkien</a></address>  
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-dark text-light mb-4 painike hided" id="ok1_painike">
+                          <i aria-hidden="true"></i>
+                          Näytä seuraava kysymys</button>
+                      </div>
+                </div>
+
+            <div class="col-12 mt-5 hided" id="doyleid">
+                <h3>2. Kuka on kirjoittanut <span class="text-decoration-underline">Sherlock Holmes</span> 
+                    -kirjat?</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">H. P. Lovecraft</li>
+                    <li class="list-group-item">Joe Abercrombie </li>
+                    <li class="list-group-item">Arthur Conan Doyle</li>
+                    <li class="list-group-item mb-2">Danielle Steel</li>
+                </ul>
+                <div class="col-3 inputkentta border-top border-dark pt-3">
+                    <label for="vastaus2" class="form-label painike fs-5">Vastauksesi:</label>
+                    <i aria-hidden="true"></i>
+                    <input type="text" class="form-control text-center" id="vastaus2" placeholder="Kirjoita vastauksesi tähän.">
+                  </div>
+                  <div>
+                  <button type="button" class="btn btn-dark text-light mb-4 mt-3 painike" id="vastaus2_painike">
+                    <i aria-hidden="true"></i>
+                    Vastaa</button>
+                </div>
+                <div class="row">
+                    <p class="col-12" id="doyle_answer">Vastauksesi on <span id="doyle_answer2">...</span></p>
+                    <p class="hided col-12 fontti2 pelementti" id="doyle1">"Sir Arthur Conan Doyle (1859–1930) oli skotlantilainen kirjailija. 
+                        Hänen tunnetuin luomuksensa on maailman kuuluisin salapoliisi Sherlock Holmes. Holmesin seikkailujen lisäksi Doyle 
+                        kirjoitti tieteiskirjallisuutta, historiallisia romaaneja, näytelmiä ja tietokirjallisuutta."</p>
+                    <address class="hided col-12" id="doyle2">Lähde: <a href="http://www.teos.fi/kirjailijat/sir-arthur-conan-doyle.html"
+                        target="_blank">Teos: SIR ARTHUR CONAN DOYLE</a></address>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-dark text-light mb-4 painike hided" id="ok2_painike">
+                      <i aria-hidden="true"></i>
+                      Näytä seuraava kysymys</button>
+                  </div>
+            </div>
+
+            <div class="col-12 mt-5 hided" id="rowlingid">
+                <h3>3. Kuka on kirjoittanut <span class="text-decoration-underline">Harry Potter</span> 
+                    -kirjasarjan?</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">J. K. Rowling</li>
+                    <li class="list-group-item">Edgar Allan Poe</li>
+                    <li class="list-group-item">Sujata Massey</li>
+                    <li class="list-group-item mb-2"> Cecilia Ahern</li>
+                </ul>
+                <div class="col-3 inputkentta border-top border-dark pt-3">
+                    <label for="vastaus3" class="form-label painike fs-5">Vastauksesi:</label>
+                    <i aria-hidden="true"></i>
+                    <input type="text" class="form-control text-center" id="vastaus3" placeholder="Kirjoita vastauksesi tähän.">
+                  </div>
+                  <div>
+                  <button type="button" class="btn btn-dark text-light mb-4 mt-3 painike" id="vastaus3_painike">
+                    <i aria-hidden="true"></i>
+                    Vastaa</button>
+                </div>
+                <div class="row">
+                    <p class="col-12" id="rowling_answer">Vastauksesi on <span id="rowling_answer2">...</span></p>
+                    <p class="hided col-12 fontti2 pelementti" id="rowling1">"Koko maailma tuntee brittiläisen J.K. Rowlingin Harry Potter 
+                        -kirjasarjan rakastettuna tekijänä. Seitsenosainen sarja on maailman myydyin, se on käännetty 73 kielelle ja 
+                        valloittanut valkokankaat kahdeksana menestyselokuvana."</p>
+                    <address class="hided col-12" id="rowling2">Lähde: <a href="https://otava.fi/kirjailijat/j-k-rowling/"
+                        target="_blank">Otava: J.K. Rowling</a></address>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-dark text-light mb-4 painike hided" id="ok3_painike">
+                      <i aria-hidden="true"></i>
+                      Näytä seuraava kysymys</button>
+                  </div>
+            </div>
+
+            <div class="col-12 mt-5 hided" id="martinid">
+                <h3>4. Kuka on kirjoittanut <span class="text-decoration-underline">Tulen ja jään 
+                    laulu</span> -kirjasarjan?</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">David Baldacci</li>
+                    <li class="list-group-item">Eino Leino</li>
+                    <li class="list-group-item">Nora Roberts</li>
+                    <li class="list-group-item mb-2">George R. R. Martin</li>
+                </ul>
+                <div class="col-3 inputkentta border-top border-dark pt-3">
+                    <label for="vastaus4" class="form-label painike fs-5">Vastauksesi:</label>
+                    <i aria-hidden="true"></i>
+                    <input type="text" class="form-control text-center" id="vastaus4" placeholder="Kirjoita vastauksesi tähän.">
+                  </div>
+                  <div>
+                  <button type="button" class="btn btn-dark text-light mb-4 mt-3 painike" id="vastaus4_painike">
+                    <i aria-hidden="true"></i>
+                    Vastaa</button>
+                </div>
+                <div class="row">
+                    <p class="col-12" id="martin_answer">Vastauksesi on <span id="martin_answer2">...</span></p>
+                    <p class="hided col-12 fontti2 pelementti" id="martin1">"Tulen ja jään laulu on yhdysvaltalaisen George R. R. Martinin kirjoittama 
+                        fantasiakirjasarja, joka on saavuttanut suuren suosion ympäri maailman. Kirjoja on myyty yli 90 miljoonaa kappaletta, ja 
+                        Tulen ja jään laulusta on tullut nykypäivän kaupallisesti menestynein eeppinen fantasiasarja."</p>
+                    <address class="hided col-12" id="martin2">Lähde: <a href="https://www.risingshadow.fi/library/series/83-tulen-ja-jaan-laulu"
+                        target="_blank">Risingshadow: Tulen ja jään laulu</a></address>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-dark text-light mb-4 painike hided" id="ok4_painike">
+                      <i aria-hidden="true"></i>
+                      Näytä seuraava kysymys</button>
+                  </div>
+            </div>
+
+            <div class="col-12 mt-5 hided" id="lewisid">
+                <h3>5. Kuka on kirjoittanut <span class="text-decoration-underline">Narnian Tarinat</span> 
+                    -kirjasarjan?</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">R. L. Stine</li>
+                    <li class="list-group-item">Brandon Sanderson </li>
+                    <li class="list-group-item">C. S. Lewis</li>
+                    <li class="list-group-item mb-2">Oscar Wilde</li>
+                </ul>
+                <div class="col-3 inputkentta border-top border-dark pt-3">
+                    <label for="vastaus5" class="form-label painike fs-5">Vastauksesi:</label>
+                    <i aria-hidden="true"></i>
+                    <input type="text" class="form-control text-center" id="vastaus5" placeholder="Kirjoita vastauksesi tähän.">
+                  </div>
+                  <div>
+                  <button type="button" class="btn btn-dark text-light mb-4 mt-3 painike" id="vastaus5_painike">
+                    <i aria-hidden="true"></i>
+                    Vastaa</button>
+                </div>
+                <div class="row">
+                    <p class="col-12" id="lewis_answer">Vastauksesi on <span id="lewis_answer2">...</span></p>
+                    <p class="hided col-12 fontti2 pelementti" id="lewis1">"Brittiläinen kirjailija ja kirjallisuudentutkija Clive Staples Lewis 
+                        (s.1898 Belfast – k.1963 Oxford) julkaisi nelisenkymmentä teosta, uskonnollista ja tieteiskirjallisuutta aikuisille 
+                        sekä seitsenosaisen lastenkirjallisuuden klassikon Narnia-sarjan (1950-56)."</p>
+                    <address class="hided col-12" id="lewis2">Lähde: <a href="https://otava.fi/kirjailijat/c-s-lewis/"
+                        target="_blank">Otava: C. S. Lewis</a></address>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-dark text-light mb-4 painike hided" id="ok5_painike">
+                      <i aria-hidden="true"></i>
+                      Näytä tulokset</button>
+                  </div>
+            </div>
+
+            <div class="row" id="lopputulos">
+                <ul id="vastauksienmaara">
+                </ul>
+              <p class="mt-5 hided"><span id=""></span></p>
+              <div class="hided mb-3" id="oikeatvaarat">
+                <h3 class="mt-5">Vastasit väärin seuraaviin kysymyksiin:</h3>
+                <p><span id="vaarat"></span></p>
+            </div>
+
+              <div class="row hided pelementti border-bottom border-secondary" id="tolkientulos">
+                <h5 class="mt-3">1. Kuka on kirjoittanut kirjan Taru Sormusten Herrasta?</h5>
+                <p>Oikea vastaus on J. R. R. Tolkien.</p>
+                <p class="fontti2">"Varsinaisen läpimurtonsa Tolkien teki 60-luvulla, jolloin 
+                  hänen Hobitin jatkoksi kirjoittamansa tuhatsivuinen fantasiajärkäle Taru Sormusten herrasta (1954­–55) 
+                  herätti vastakaikua amerikkalaisilla yliopistokampuksilla."</p>
+                  <address>Lähde: <a href="https://www.wsoy.fi/kirjailija/j.-r.-r.-tolkien"
+                  target="_blank">WSOY: J. R. R. Tolkien</a></address>  
+              </div>
+
+              <div class="row hided border-top border-secondary pelementti" id="doyletulos">
+                <h5 class="mt-3">2. Kuka on kirjoittanut Sherlock Holmes -kirjat?</h5>
+                <p>Oikea vastaus on Arthur Conan Doyle.</p>
+                <p class="fontti2">"Sir Arthur Conan Doyle (1859–1930) oli skotlantilainen kirjailija. 
+                    Hänen tunnetuin luomuksensa on maailman kuuluisin salapoliisi Sherlock Holmes. Holmesin seikkailujen lisäksi Doyle 
+                    kirjoitti tieteiskirjallisuutta, historiallisia romaaneja, näytelmiä ja tietokirjallisuutta."</p>
+                <address>Lähde: <a href="http://www.teos.fi/kirjailijat/sir-arthur-conan-doyle.html"
+                    target="_blank">Teos: SIR ARTHUR CONAN DOYLE</a></address>
+            </div>
+
+            <div class="row hided border-top border-secondary pelementti" id="rowlingtulos">
+                <h5 class="mt-3">3. Kuka on kirjoittanut Harry Potter -kirjasarjan?</h5>
+                <p>Oikea vastaus on J. K. Rowling.</p>
+                <p class="fontti2">"Koko maailma tuntee brittiläisen J.K. Rowlingin Harry Potter 
+                    -kirjasarjan rakastettuna tekijänä. Seitsenosainen sarja on maailman myydyin, se on käännetty 73 kielelle ja 
+                    valloittanut valkokankaat kahdeksana menestyselokuvana."</p>
+                <address>Lähde: <a href="https://otava.fi/kirjailijat/j-k-rowling/"
+                    target="_blank">Otava: J.K. Rowling</a></address>
+            </div>
+
+            <div class="row hided border-top border-secondary pelementti" id="martintulos">
+                <h5 class="mt-3">4. Kuka on kirjoittanut Tulen ja jään laulu -kirjasarjan?</h5>
+                <p>Oikea vastaus on George. R. R. Martin.</p>
+                <p class="fontti2" id="martin1">"Tulen ja jään laulu on yhdysvaltalaisen George R. R. Martinin kirjoittama 
+                    fantasiakirjasarja, joka on saavuttanut suuren suosion ympäri maailman. Kirjoja on myyty yli 90 miljoonaa kappaletta, ja 
+                    Tulen ja jään laulusta on tullut nykypäivän kaupallisesti menestynein eeppinen fantasiasarja."</p>
+                <address>Lähde: <a href="https://www.risingshadow.fi/library/series/83-tulen-ja-jaan-laulu"
+                    target="_blank">Risingshadow: Tulen ja jään laulu</a></address>
+            </div>
+
+            <div class="row hided border-top border-secondary pelementti" id="lewistulos">
+                <h5 class="mt-3">5. Kuka on kirjoittanut Narnian Tarinat -kirjasarjan?</h5>
+                <p>Oikea vastaus on C. S. Lewis.</p>
+                <p class="fontti2" id="lewis1">"Brittiläinen kirjailija ja kirjallisuudentutkija Clive Staples Lewis 
+                    (s.1898 Belfast – k.1963 Oxford) julkaisi nelisenkymmentä teosta, uskonnollista ja tieteiskirjallisuutta aikuisille 
+                    sekä seitsenosaisen lastenkirjallisuuden klassikon Narnia-sarjan (1950-56)."</p>
+                <address>Lähde: <a href="https://otava.fi/kirjailijat/c-s-lewis/"
+                    target="_blank">Otava: C. S. Lewis</a></address>
+            </div>
+
+            </div>
+        </form>
+        </section>
+
+        <footer class="footer row ps-5">
+            <div class="col-lg text-center text-lg-start">
+              <p>Laura Vikström<br>
+                2021</p>
+            </div>
+        </footer>
+
+        </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" 
+    integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" 
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" 
+    integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" 
+    crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/laura-vikstrom2.js"></script>
+</body>
+</html>
