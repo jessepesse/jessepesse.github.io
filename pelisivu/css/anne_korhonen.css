@@ -1,0 +1,70 @@
+/* Author:  Anne Korhonen, Web-projekti
+            Kevät 2021 */
+
+@import url('https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&display=swap');
+
+/*Visakysymyksien muotoilut*/
+ul{
+    list-style-type: none;
+    display: inline-block;
+    text-align: left;
+    font-family: 'Akaya Kanadaka', cursive;
+}
+
+/*vastaukset*/
+.hided{
+    display: none;
+}
+
+/*Tekstien muotoilu*/
+h2{
+    font-family: 'Akaya Kanadaka', cursive;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+h3{
+    font-family: 'Akaya Kanadaka', cursive;
+    background: linear-gradient(to right, #009900, #20d420);
+    display: inline-block;
+    text-align: center;
+    border-radius: 3px;
+}
+
+p{
+    font-family: 'Akaya Kanadaka', cursive;
+}
+
+/* Vastausvaihtoehtojen värit: valittu,väärä,oikea*/
+.choise{
+    background: linear-gradient(to right, #065f06, #20d420);
+}
+
+.false{
+    background: linear-gradient(to right, #bd1212, #e63e3e);
+}
+
+.true{
+    background-color: darkgreen;
+}
+
+/*sivun värit ja marginaalit*/
+section{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 100px;
+    margin-right: 100px;
+    /*background-color: rgba(214, 255, 187, 0.911); väri pois?Vaihto muuksi?*/
+}
+
+/*Kuvien muokkaus*/
+img{
+    max-width: 100%;
+}
+
+/*Vastauspainike*/
+.button{
+    background: linear-gradient(to right, #009900, #20d420);
+    font-family: 'Akaya Kanadaka', cursive;
+    border-radius: 5px;
+}
