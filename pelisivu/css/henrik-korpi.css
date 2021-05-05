@@ -1,0 +1,82 @@
+/*Tekijä: Henrik Korpi / TIK21KM */
+
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light+Two&display=swap');
+/*Otsikoiden fontit ja koko*/
+h2,h3 {
+    font-family: 'Shadows Into Light Two', cursive;
+}
+
+h2 {
+    font-size: 3rem;
+    margin-top: 1rem;
+}
+/* Kysymysten muotoilu */
+form {
+    background-color: #c8ddb9;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1rem;
+    padding: 1rem;
+    border-color: black;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+
+/* Vastauksen väri */
+.oikein {
+    background-color: #45d145;
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.väärin {
+    background-color: #f06644;
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+/* Näytä vastaukset napin ulkoasu */
+button {
+    padding: 1rem;
+    font-size: 16px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1rem;
+    background-color: #c8ddb9;
+    border-color: black;
+    font-weight: bold;
+}
+/*Vastausten ulkoasu*/
+#answer1, #answer2, #answer3, #answer4, #answer5 {
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1rem;
+    padding: 1rem;
+    border-color: black;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+/*Elementtien piilotus*/
+.piilota {
+    display: none;
+}
+/*Oikean ja väärän vastauksen väri radiobuttoniin*/
+.red {
+    background-color: #f06644;
+}
+
+.green {
+    background-color: #45d145;
+}
+/*Tuloksen muotoilu*/
+#tulos {
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1rem;
+    padding: 1rem;
+    border-color: black;
+    background-color: #c8ddb9;
+    margin-top: 2rem;
+}

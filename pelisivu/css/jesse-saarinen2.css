@@ -1,0 +1,52 @@
+/* Tekijä: Jesse Saarinen / TIK21KM */
+@import url('https://fonts.googleapis.com/css2?family=Exo:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish&display=swap');
+
+h2 {
+    font-family: 'Exo', sans-serif;
+}
+
+p {
+    font-family: 'Mulish', sans-serif;
+}
+
+.teksti {
+    margin: 0 auto;    
+}
+
+.input {
+    margin: 0 auto;
+}
+
+.kysymys {
+ font-size: 23px;
+}
+
+/* Painikkeiden ulkoasu */
+.btn {
+    background-color: #4fa32a;
+}
+
+.btn:hover {
+    background-color: #000000;
+    color:rgb(255, 255, 255)
+}
+
+.form-check-input:hover {
+    background-color: #ccc;
+}
+
+.form-control {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.form-control:hover {
+ background-color: rgb(233, 233, 233);
+ color:#000000;
+}
+
+/* Elementtien piilotus */
+.hidden {
+    display: none;
+}
