@@ -1,0 +1,98 @@
+
+ @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Open+Sans&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Mali:wght@300;700&display=swap');
+
+ 
+h2 {
+     
+    font-family: 'Mali', cursive;
+    font-weight: 500;
+
+}
+
+h1.kaisa_h1  {
+    font-family: 'Mali', cursive;
+    font-weight: 700;
+    text-shadow: 2px 4px grey;
+}
+
+
+
+img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 5px 8px grey;
+    
+}
+
+label {
+    margin-bottom: 0.5em;
+    width: 7em;
+    display: inline-block;
+    font-family: 'Mali', cursive;
+}
+
+button {
+
+    font-family: 'Mali', cursive;
+    font-weight: 500;
+    box-shadow: 3px 5px grey;
+    padding-bottom: 5px;
+}
+
+
+input {
+    width: 6em;
+}
+
+
+input[type=radio],
+input[type=checkbox] {
+    width: 1.2em;
+}
+
+.radiolabel {
+    width: 8em;
+}
+
+
+
+/* valinta-napin valinnan mm. väri valittuna */
+
+.selected {
+    background-color: #49c760;
+    color: black;
+}
+
+
+.selected_nope {
+    background-color: #c74848;
+    color: white;
+}
+
+.selected_ohyes {
+    font-weight: bold;
+    color:  #49c760;
+  
+
+}
+
+
+/* piilossa */
+.hided, 
+.hided p {
+    display: none;
+    font-family: 'Mali', cursive;
+
+}
+
+/* Tuloksen tyylit */
+p[name="fin_result"] {
+    font-family: 'Mali', cursive;
+    font-weight: bold;
+    font-size: large;
+    text-shadow: 2px 4px grey;
+
+}
+
+

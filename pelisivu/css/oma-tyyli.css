@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Snowburst+One&display=swap" rel="stylesheet"');
+@import url('https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Original+Surfer&display=swap');
+
+/* Bodyn muotoilu */
+body {
+    background-color: #EBF7E3;
+}
+
+/* Headerin muotoilu */
+header {
+    background-color: #66B042;
+}   
+
+/* Navbarin linkkien muotoilu muotoilu */
+.nav-link {
+    font-family: 'New Tegomin', serif;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Sectionin muotoilu */
+section {
+    background-color: #EBF7E3;
+    padding-bottom: 8em;
+}
+
+/* h1-otsikon, tektstien ja etusivun listan muotoilu */
+h1 {
+    font-family: 'Snowburst One', cursive;
+}
+
+.fontti1 {
+    font-family: 'Original Surfer', cursive;
+}
+
+.visalista1 {
+    font-family: 'Original Surfer', cursive;
+    font-size: 20px;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Kuvien muotoilu */
+img {
+    max-width: 100%;
+}
+
+/* Footerin muotoilu */
+footer {
+    background-color: #66B042;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 10px;
+}
+
+/* Kuvien muotoilu pienillä näytöillä muotoilu */
+@media only screen and (max-width: 767px)
+{
+    img {
+        max-width: 170px;
+    }
+
+    .etusivu1 {
+        display: flex;
+    }
+
+    .paa {
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+    }
+}
