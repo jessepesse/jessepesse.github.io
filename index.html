@@ -3,88 +3,86 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1, shrink-to-fit=no maximum-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=5, user-scalable=yes">
   <link rel="shortcut icon" href="icon.png">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="min.css">
   <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <title>Startpage....</title>
 </head>
 
 <body>
-  <main>
-    <div class="container-fluid">
-      <section class="row">
-        <div class="col-12 text-center">  
-          <div class="google">
-      <div class="google-style">
-        <!-- Kellon aika -->
+  <!-- Focus Mode Toggle Button -->
+  <button id="focus-btn" class="focus-btn" type="button" aria-label="Focus Mode" title="Focus Mode">
+    <i class="las la-eye"></i>
+  </button>
+
+  <!-- Edit Mode Toggle Button -->
+  <button id="edit-btn" class="edit-btn" type="button" aria-label="Edit Mode" title="Muokkaa linkkejä">
+    <i class="las la-cog"></i>
+  </button>
+
+  <main class="site-main">
+    <!-- HEADER SECTION: Clock, date, greeting, search -->
+    <header class="header-section">
+      <div class="header-content">
+        <h2 id="greeting" class="greeting-text"></h2>
         <h1 id="time" class="timing"></h1>
-        <!-- Hakupalkki -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
-          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-        <form action="https://www.duckduckgo.com/" target="_blank">
-          <input name="q" type="search">
-          <button><i class="fa fa-search"></i>
-          </button>
+        <p id="date" class="date-text"></p>
+        
+        <!-- Weather Widget -->
+        <div id="weather-widget" class="weather-widget">
+          <div id="weather-current" class="weather-current">
+            <i class="las la-cloud weather-icon"></i>
+            <span id="weather-text">Ladataan säätä...</span>
+            <button id="location-btn" class="location-btn" type="button" aria-label="Päivitä sijainti" title="Päivitä sijainti">
+              <i class="las la-map-marker-alt"></i>
+            </button>
+            <span id="location-display" class="location-display"></span>
+          </div>
+          <div id="weather-forecast" class="forecast-text"></div>
+        </div>
+        
+        <form id="search-form" action="https://www.duckduckgo.com/" target="_blank" role="search" aria-label="Site search">
+          <input id="search-input" name="q" type="search" autocomplete="off" autofocus placeholder="Hae (esim. y! jotain)" class="search-input">
+          <button type="submit" class="search-btn" aria-label="Search"><i class="fa fa-search"></i></button>
         </form>
       </div>
-    </div>
-    </div>
+    </header>
+
+    <!-- LINKS SECTION: Dynamic cards container -->
+    <section class="links-section">
+      <div class="container-fluid">
+        <div id="card-container" class="row justify-content-center">
+          <!-- Cards rendered dynamically by JS -->
+        </div>
+        <!-- Add Group button (visible in edit mode) -->
+        <div class="add-group-container">
+          <button id="add-group-btn" class="add-group-btn" type="button" aria-label="Lisää ryhmä">
+            <i class="las la-plus"></i> Lisää ryhmä
+          </button>
+        </div>
+      </div>
     </section>
+  </main>
 
-
-    <div class="row">
-
-      <!-- Ajankulu -->
-      <div class="col-3 square">
-        <div class="square-header">Ajankulu</div>
-        <a class="text-a" href="https://www.reddit.com/" target="_blank"><i class="lab la-reddit pr-2"></i>Reddit</a>
-        <a class="text-a" href="https://www.youtube.com/" target="_blank"><i class="lab la-youtube pr-2"></i>Youtube</a>
-        <a class="text-a" href="https://feedly.com/" target="_blank"><i class="las la-rss pr-2"></i>Feedly</a>
-      </div>
-
-      <!-- Uutiset -->
-      <div class="col-3 square">
-        <div class="square-header">Uutiset</div>
-        <a class="text-a" href="https://www.ampparit.com/" target="_blank">Ampparit</a>
-        <a class="text-a" href="https://www.is.fi/" target="_blank">Ilta-Sanomat</a>
-        <a class="text-a" href="https://www.iltalehti.fi/" target="_blank">Iltalehti</a>
-        <a class="text-a" href="https://www.hs.fi" target="_blank">HS</a>
-        <a class="text-a" href="https://www.kaleva.fi/" target="_blank">Kaleva</a>
-        <a class="text-a" href="https://yle.fi/uutiset/" target="_blank">Yle Uutiset</a>
-        <a class="text-a" href="https://mtvuutiset.fi" target="_blank">MTV Uutiset</a>
-      </div>
-
-      <!-- Sähköpostit -->
-      <div class="col-3 square">
-        <div class="square-header">Sähköpostit</div>
-        <a class="text-a" href="https://gmail.com" target="_blank">Gmail</a>
-        <a class="text-a" href="https://outlook.com" target="_blank">Outlook</a>
-        <a class="text-a" href="https://tutanota.com" target="_blank">Tutanota</a>
-      </div>
-
-      <!--Muut-->
-      <div class="col-3 square">
-        <div class="square-header">Muut</div>
-        <a class="text-a" href="https://github.com">Github<i class="lab la-github pl-2"></i></a>
-      </div>
+  <!-- Help / Cheat Sheet Widget -->
+  <div class="help-container">
+    <div class="help-icon">
+      <i class="las la-question-circle"></i>
+    </div>
+    <div class="help-box">
+      <!-- Content dynamically rendered by scrtip.js renderHelp() -->
     </div>
   </div>
-</main>
+
   <!-- JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="scrtip.js"></script>
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
 </body>
 </html>

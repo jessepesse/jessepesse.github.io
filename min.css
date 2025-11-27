@@ -1,32 +1,200 @@
-@import url('https://fonts.googleapis.com/css2?family=Arima+Madurai&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap');
 
+/* ==========================================
+   CSS VARIABLES
+   ========================================== */
+:root {
+  --bg-1: #0b0c10;
+  --card-bg: rgba(255,255,255,0.03);
+  --accent: #7c4dff;
+  --glass-blur: 6px;
+  --font-main: 'Fira Sans', sans-serif;
+}
 
-/* PC Style */
-
-html{
-  background-color: #000;
+/* ==========================================
+   BASE RESET & BODY
+   ========================================== */
+html, body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0px;
+  font-family: var(--font-main);
+  background: linear-gradient(180deg, #0b0c10 0%, #0f1115 100%);
   user-select: none;
   -moz-user-select: none;
-  background-color: #000 !important;
 }
 
-h1 {
-  font-family: 'Arima Madurai', cursive;
+/* ==========================================
+   MAIN LAYOUT: Vertical stacking, no overlap
+   ========================================== */
+.site-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
+/* ==========================================
+   HEADER SECTION: Clock, date, greeting, search
+   ========================================== */
+.header-section {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem 2.5rem 1rem;
+  margin-bottom: 1.5rem;
+  box-sizing: border-box;
+}
+
+.header-content {
+  text-align: center;
+  width: 100%;
+}
+
+/* Greeting */
+.greeting-text {
+  font-family: var(--font-main);
+  font-size: 1.25rem;
+  color: rgba(255,255,255,0.7);
+  margin: 0 0 0.5rem 0;
+}
+
+/* Clock */
 h1.timing {
-  font-size: 3.2rem;
-  color: #fff
+  font-family: var(--font-main);
+  font-size: 3.5rem;
+  color: #fff;
+  margin: 0.25rem 0;
+  line-height: 1.1;
+}
+
+/* Date */
+.date-text {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.6);
+  margin: 0.5rem 0 1.5rem 0;
+}
+
+/* ==========================================
+   SEARCH FORM
+   ========================================== */
+#search-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.search-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 48px;
+  padding: 0 1rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  box-sizing: border-box;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.search-input::placeholder {
+  color: rgba(255,255,255,0.5);
+}
+
+.search-input:focus {
+  box-shadow: 0 0 0 4px rgba(124,77,255,0.15);
+  border-color: rgba(124,77,255,0.3);
+}
+
+.search-btn {
+  flex: 0 0 auto;
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.search-btn:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.search-btn .fa {
+  width: auto;
+  height: auto;
+  padding: 0;
+  font-size: 1rem;
+}
+
+/* ==========================================
+   LINKS SECTION: Cards grid
+   ========================================== */
+.links-section {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px;
+  box-sizing: border-box;
+}
+
+/* ==========================================
+   CARDS (Glassmorphism)
+   ========================================== */
+.card.glass {
+  background: var(--card-bg);
+  border: 1px solid rgba(255,255,255,0.06);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+  color: #eaeaea;
+  border-radius: 12px;
+}
+
+.square-header {
+  font-family: var(--font-main);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.75rem;
+}
+
+/* ==========================================
+   LINKS
+   ========================================== */
+a {
+  font-family: var(--font-main);
+  text-decoration: none;
 }
 
 .text-a {
-  color: #8c8c8b;
+  color: #b0b0b0;
+  transition: color 0.15s;
 }
 
 .text-a:hover {
@@ -34,218 +202,796 @@ h1.timing {
   text-decoration: none;
 }
 
-form{
-  position: relative;
-  top: 50%;
-  width: 400px;
-  height: 50px;
-  background: white;
-  box-sizing: border-box;
-  border-radius: 25px;
-  border: 4px solid white;
-  padding: 5px;
+.text-a.d-block {
+  margin: 0.4rem 0;
 }
 
-
-input{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 92%;
-  height: 42.5px;
-  line-height: 30px;
-  outline: 0;
-  border: 0;
-  display: none;
-  font-size: 1em;
-  border-radius: 20px;
-  padding: 0 20px;
-  white-space: nowrap;
+/* ==========================================
+   WEATHER WIDGET
+   ========================================== */
+.weather-widget {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0.75rem 0 1.25rem 0;
 }
 
-input[type=text]:focus{
-width: 100;
+.weather-current {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
-form[type=text]:focus{
-  width: 100;
+.weather-icon {
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.9);
 }
 
-input:valid {
-  width: 100;  
+#weather-text {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
 }
 
-form:hover{
-  width: 400px;
+.weather-temp {
+  font-weight: 600;
+  color: #fff;
+}
+
+.weather-details {
+  font-size: 0.9em;
+  opacity: 0.7;
+}
+
+.forecast-text {
+  font-size: 0.85rem;
+  color: #aecbfa;
+  opacity: 0.9;
+  margin-top: 4px;
+  min-height: 1.2em;
+}
+
+.location-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1rem;
   cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  margin-left: 0.3rem;
+  border-radius: 4px;
+  transition: color 0.2s, background 0.2s;
 }
 
-form input{
-  display: inline-block;
+.location-btn:hover {
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.1);
 }
 
-form:hover .fa{
-  background: #07051a;
-  color: white;
+.location-btn.updating {
+  animation: pulse 1s infinite;
 }
 
-.fa{
-  box-sizing: border-box;
-  padding: 5px;
-  width: 42.5px;
-  height: 42.5px;
+.location-display {
+  font-size: 0.8em;
+  color: rgba(255, 255, 255, 0.6);
+  margin-left: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* ==========================================
+   FOCUS MODE TOGGLE BUTTON
+   ========================================== */
+.focus-btn {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.focus-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+  transform: scale(1.05);
+}
+
+.focus-btn:active {
+  transform: scale(0.95);
+}
+
+/* ==========================================
+   EDIT MODE TOGGLE BUTTON
+   ========================================== */
+.edit-btn {
+  position: fixed;
+  top: 1rem;
+  right: 4rem;
+  z-index: 1000;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.edit-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+  transform: scale(1.05);
+}
+
+.edit-btn:active {
+  transform: scale(0.95);
+}
+
+body.editing .edit-btn {
+  background: rgba(124, 77, 255, 0.2);
+  border-color: rgba(124, 77, 255, 0.4);
+  color: var(--accent);
+}
+
+/* ==========================================
+   PUSH LAYOUT FOR SIDEBAR IN EDIT MODE
+   ========================================== */
+/* Push main content left when sidebar is open */
+body.editing .site-main {
+  margin-right: 320px;
+  transition: margin-right 0.4s ease;
+}
+
+/* ==========================================
+   SIDEBAR SETTINGS (Consolidated in Help Box)
+   ========================================== */
+/* Sidebar close button */
+.sidebar-close-btn {
+  display: none;
   position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 77, 77, 0.15);
+  border: 1px solid rgba(255, 77, 77, 0.3);
+  border-radius: 50%;
+  color: #ff6b6b;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  width: 36px;
+  height: 36px;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.sidebar-close-btn:hover {
+  background: rgba(255, 77, 77, 0.25);
+  border-color: rgba(255, 77, 77, 0.4);
+  transform: scale(1.05);
+}
+
+body.editing .sidebar-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-settings-section {
+  margin-bottom: 1.5rem;
+}
+
+.setting-group {
+  margin-bottom: 1.25rem;
+}
+
+.setting-label {
+  display: block;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Input group for location search */
+.input-group-sidebar {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.sidebar-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: #fff;
+  font-family: var(--font-main);
+  font-size: 0.85rem;
+  padding: 0.5rem 0.75rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.sidebar-input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.sidebar-input:focus {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--accent);
+}
+
+.sidebar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  width: 36px;
+  height: 36px;
+  transition: all 0.2s ease;
+}
+
+.sidebar-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.95);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Action buttons for data management */
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sidebar-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--font-main);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0.6rem 0.75rem;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.sidebar-action-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.95);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-action-btn.text-danger {
+  color: rgba(255, 100, 100, 0.8);
+  border-color: rgba(255, 77, 77, 0.3);
+}
+
+.sidebar-action-btn.text-danger:hover {
+  background: rgba(255, 77, 77, 0.15);
+  color: #ff6b6b;
+  border-color: rgba(255, 77, 77, 0.4);
+}
+
+.sidebar-divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  margin: 1.5rem 0;
+}
+
+/* ==========================================
+   EDIT MODE: INLINE CONTROLS
+   ========================================== */
+.link-edit-btn,
+.link-delete-btn,
+.card-delete-btn,
+.link-add-btn {
+  display: none;
+  background: rgba(255, 77, 77, 0.15);
+  border: 1px solid rgba(255, 77, 77, 0.3);
+  color: #ff6b6b;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.link-edit-btn {
+  background: rgba(255, 193, 77, 0.15);
+  border-color: rgba(255, 193, 77, 0.3);
+  color: #ffcc66;
+}
+
+.link-add-btn {
+  background: rgba(77, 255, 130, 0.15);
+  border-color: rgba(77, 255, 130, 0.3);
+  color: #4dff82;
+  margin-top: 0.75rem;
+  margin-left: 0;
+  width: 100%;
+}
+
+.card-delete-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
+body.editing .link-edit-btn,
+body.editing .link-delete-btn,
+body.editing .card-delete-btn,
+body.editing .link-add-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.link-edit-btn:hover {
+  background: rgba(255, 193, 77, 0.3);
+}
+
+.link-delete-btn:hover,
+.card-delete-btn:hover {
+  background: rgba(255, 77, 77, 0.3);
+}
+
+.link-add-btn:hover {
+  background: rgba(77, 255, 130, 0.3);
+}
+
+/* Card needs relative position for delete button */
+body.editing .card.glass {
+  position: relative;
+}
+
+/* Link row layout for delete button */
+.link-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.link-row .text-a {
+  flex: 1;
+}
+
+/* ==========================================
+   ADD GROUP BUTTON
+   ========================================== */
+.add-group-container {
+  display: none;
+  justify-content: center;
+  margin-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+body.editing .add-group-container {
+  display: flex;
+}
+
+.add-group-btn {
+  background: rgba(124, 77, 255, 0.1);
+  border: 2px dashed rgba(124, 77, 255, 0.4);
+  color: var(--accent);
+  border-radius: 12px;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-group-btn:hover {
+  background: rgba(124, 77, 255, 0.2);
+  border-color: rgba(124, 77, 255, 0.6);
+}
+
+/* ==========================================
+   LOCALHOST CARD STYLING
+   ========================================== */
+.card.glass.localhost-card {
+  background: rgba(255, 200, 50, 0.05);
+  border-color: rgba(255, 200, 50, 0.15);
+}
+
+.card.glass.localhost-card .square-header {
+  color: rgba(255, 200, 50, 0.9);
+}
+
+.card.glass.localhost-card .text-a {
+  color: rgba(255, 200, 50, 0.7);
+}
+
+.card.glass.localhost-card .text-a:hover {
+  color: rgba(255, 200, 50, 1);
+}
+
+/* ==========================================
+   FOCUS MODE TRANSITIONS
+   ========================================== */
+.header-section {
+  transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.links-section {
+  transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+              filter 0.6s ease;
+}
+
+/* ==========================================
+   FOCUS MODE ACTIVE STATE
+   ========================================== */
+body.focus-mode .links-section {
+  opacity: 0;
+  transform: translateY(50px) scale(0.95);
+  pointer-events: none;
+  filter: blur(10px);
+}
+
+body.focus-mode .header-section {
+  margin-top: 25vh;
+}
+
+body.focus-mode .focus-btn {
+  background: rgba(124, 77, 255, 0.2);
+  border-color: rgba(124, 77, 255, 0.4);
+  color: var(--accent);
+}
+
+/* Mobile adjustments */
+@media only screen and (max-width: 720px) {
+  .site-main {
+    padding: 0.5rem;
+  }
+
+  .header-section {
+    padding: 1.5rem 0.5rem 1.5rem 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  h1.timing {
+    font-size: 2.5rem;
+  }
+
+  .greeting-text {
+    font-size: 1rem;
+  }
+
+  .date-text {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .weather-widget {
+    font-size: 1rem;
+    margin: 0.5rem 0 1rem 0;
+  }
+
+  .weather-icon {
+    font-size: 1.2rem;
+  }
+
+  .forecast-text {
+    font-size: 0.8rem;
+  }
+
+  #search-form {
+    width: 100%;
+    max-width: none;
+    padding: 0 0.25rem;
+  }
+
+  .search-input {
+    height: 44px;
+    font-size: 1rem;
+  }
+
+  .search-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .links-section {
+    padding: 0 0.25rem;
+  }
+
+  .card.glass {
+    margin-bottom: 0.75rem;
+    min-height: 44px;
+  }
+
+  .card-body {
+    padding: 0.75rem;
+  }
+
+  .card-title {
+    font-size: 0.9rem;
+  }
+
+  .link-item {
+    padding: 0.5rem;
+  }
+
+  /* Focus and Edit buttons - larger touch targets */
+  .focus-btn,
+  .edit-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 1.5rem;
+  }
+
+  /* Add group button */
+  .add-group-btn {
+    padding: 0.75rem;
+    font-size: 1rem;
+  }
+
+  .location-display {
+    font-size: 0.7em;
+  }
+
+  /* Mobile: Reduce sidebar width and adjust push layout */
+  body.editing .help-box {
+    width: 280px !important;
+  }
+
+  body.editing .site-main {
+    margin-right: 280px;
+  }
+
+  /* Smaller sidebar components on mobile */
+  .sidebar-input,
+  .sidebar-btn,
+  .sidebar-action-btn {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.6rem;
+  }
+
+  .sidebar-btn {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* ==========================================
+   HELP / CHEAT SHEET WIDGET
+   ========================================== */
+.help-container {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 2000;
+}
+
+.help-icon {
+  font-size: 2.5rem;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.help-icon:hover {
+  color: var(--accent);
+  transform: scale(1.1);
+}
+
+.help-box {
+  position: fixed;
   top: 0;
   right: 0;
-  border-radius: 50%;
-  color: #07051a;
-  text-align: center;
-  font-size: 1em;
-  transition: all 1s;
+  width: 320px;
+  height: 100vh;
+  background: rgba(10, 10, 12, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  font-size: 0.85rem;
+  box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 900;
+  /* Hidden by default: slide to the right */
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
 }
 
-button {
-  background-color: Transparent;
-  background-repeat:no-repeat;
-  border: none;
-  cursor:pointer;
-  overflow: hidden;
-  outline:none;
+/* Show on hover when NOT in edit mode */
+body:not(.editing) .help-container:hover .help-box {
+  transform: translateX(0);
+  pointer-events: auto;
 }
 
-.google {  
-  width: 100%;
-  height: 30vh;
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
-  color: #fff
+.help-section {
+  margin-bottom: 0.75rem;
 }
 
-.google-style {
-  font-size: 1.5rem;
-  height: 100em;
-  margin: 6em 0em;
-  text-align: top;
+.help-section:last-child {
+  margin-bottom: 0;
 }
 
-.square {
-  padding-top: 4em;
-  font-size: 1.3rem;
-  height: 10em;
-  margin: 0em 0em;
-  text-align: center;
-}
-
-.square-header {
-  font-family: 'Slabo 13px', serif;
-  font-size: 2rem;
+.help-header {
+  font-size: 0.95rem;
   font-weight: 600;
-  color: #fff;
-  margin: 0em 0em 0em 0em;
+  color: var(--accent);
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-a {
-  font-family: 'Ubuntu', sans-serif;
-  text-decoration: none;
-  display: block;
-  margin: .5em 0em;
+.help-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-/* Mobile Styles */
-@media only screen and (max-width: 720px) {
-  
-
-.google {  
-  width: 100%;
-  height: 30vh;
-  display: inline-flex;
+.help-list li {
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0.35rem 0;
+  display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
-  color: #fff
+  gap: 0.5rem;
 }
 
-.google-style {
-  font-size: 1.5rem;
-  height: 50em;
-  margin: 6em 0em;
-  text-align: top;
-}
-
-form{
-  position: relative;
-  top: 50%;
-  width: 300px;
-  height: 50px;
-  background: white;
-  box-sizing: border-box;
-  border-radius: 25px;
-  border: 4px solid white;
-  padding: 5px;
-}
-
-h1.timing {
-  top: 10%;
-  font-size: 3.2rem;
-  color: #fff
-}
-
-.square {
-  padding: 1.5em;
-  padding-top: 140px;
+.help-list code {
+  background: rgba(124, 77, 255, 0.2);
+  border: 1px solid rgba(124, 77, 255, 0.4);
+  color: var(--accent);
+  padding: 2px 6px;
+  border-radius: 4px;
   font-size: 0.8rem;
-  width: auto;
-  margin: 0em 0em;
-  text-align: center;
-}
-
-.square-header {
-  font-family: 'Slabo 13px', serif;
-  font-size: 1rem;
+  font-family: 'Courier New', monospace;
   font-weight: 600;
-  color: #fff;
-  margin: 0em 0em 0em 0em;
 }
 
-input{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 92%;
-  height: 42.5px;
-  line-height: 30px;
-  outline: 0;
-  border: 0;
+.help-divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 0.75rem 0;
+}
+
+/* ==========================================
+   HELP MODULE: EDIT MODE - SIDE PANEL
+   ========================================== */
+/* Show sidebar in edit mode - slide from right */
+body.editing .help-box {
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* Help edit buttons */
+.help-edit-btn,
+.help-delete-btn {
   display: none;
-  font-size: 1em;
-  border-radius: 20px;
-  padding: 0 20px;
-  white-space: nowrap;
-}
-
-input[type=text]:focus{
-width: 100;
-}
-
-form[type=text]:focus{
-  width: 100;
-}
-
-input:valid {
-  width: 100;  
-}
-
-form:hover{
-  width: 300px;
+  background: rgba(255, 77, 77, 0.15);
+  border: 1px solid rgba(255, 77, 77, 0.3);
+  color: #ff6b6b;
+  border-radius: 4px;
+  padding: 2px 4px;
+  font-size: 0.7rem;
   cursor: pointer;
+  margin-left: 0.5rem;
+  transition: all 0.2s ease;
 }
 
+.help-edit-btn {
+  background: rgba(255, 193, 77, 0.15);
+  border-color: rgba(255, 193, 77, 0.3);
+  color: #ffcc66;
 }
 
-/* @media only screen and (max-width: 1500px) {
-  .square {
-    padding-top: 110px;
+.help-add-btn {
+  display: none;
+  background: rgba(77, 255, 130, 0.15);
+  border-color: rgba(77, 255, 130, 0.3);
+  color: #4dff82;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  width: 100%;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(77, 255, 130, 0.3);
+}
+
+body.editing .help-edit-btn,
+body.editing .help-delete-btn,
+body.editing .help-add-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.help-edit-btn:hover {
+  background: rgba(255, 193, 77, 0.3);
+}
+
+.help-delete-btn:hover {
+  background: rgba(255, 77, 77, 0.3);
+}
+
+.help-add-btn:hover {
+  background: rgba(77, 255, 130, 0.3);
+}
+
+.help-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Mobile adjustments for help widget */
+@media only screen and (max-width: 720px) {
+  .help-container {
+    bottom: 1rem;
+    right: 1rem;
   }
-} */
+
+  .help-icon {
+    font-size: 2rem;
+  }
+
+  .help-box {
+    width: 180px;
+    font-size: 0.8rem;
+    padding: 0.75rem;
+  }
+
+  .help-header {
+    font-size: 0.85rem;
+  }
+
+  .help-list code {
+    font-size: 0.75rem;
+    padding: 1px 4px;
+  }
+}
