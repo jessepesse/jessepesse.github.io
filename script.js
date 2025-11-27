@@ -113,7 +113,8 @@ document.addEventListener('DOMContentLoaded', function () {
       const hostname = new URL(url).hostname;
       const parts = hostname.replace('www.', '').split('.');
       return parts[0].charAt(0).toUpperCase() + parts[0].slice(1);
-    } catch {
+    } catch (error) {
+      console.error('Error parsing URL:', error);
       return 'Link';
     }
   }
@@ -158,7 +159,8 @@ document.addEventListener('DOMContentLoaded', function () {
             appData.location = DEFAULT_CONFIG.location;
           }
         }
-      } catch {
+      } catch (error) {
+        console.error('Failed to parse saved config:', error);
         appData = JSON.parse(JSON.stringify(DEFAULT_CONFIG));
       }
     } else {
@@ -745,6 +747,7 @@ document.addEventListener('DOMContentLoaded', function () {
         alert('✅ Asetukset kopioitu leikepöydälle!');
       });
     } catch (err) {
+      console.error('Export config error:', err);
       alert('❌ Virhe kopioitaessa: ' + err.message);
     }
   }
@@ -782,6 +785,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       alert('✅ Asetukset tuotu onnistuneesti!');
     } catch (err) {
+      console.error('Import config error:', err);
       alert('❌ Virhe tuotaessa asetuksia:\n' + err.message);
     }
   }
