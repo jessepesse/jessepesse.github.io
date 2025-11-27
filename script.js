@@ -436,6 +436,11 @@ document.addEventListener('DOMContentLoaded', function () {
       const newTrigger = prompt('Muokkaa komentoa (esim. "y!"):', bang.trigger);
       if (newTrigger === null) return; // User cancelled
       if (newTrigger.trim()) {
+        // Validate trigger: only allow alphanumeric characters and !?- symbols
+        if (!/^[a-zA-Z0-9!?-]+$/.test(newTrigger.trim())) {
+          alert('Virhe: Komento saa sisältää vain kirjaimia, numeroita ja !?- merkkejä');
+          return;
+        }
         bang.trigger = newTrigger.trim();
       }
 
@@ -507,6 +512,12 @@ document.addEventListener('DOMContentLoaded', function () {
     if (type === 'bang') {
       const trigger = prompt('Syötä komento (esim. "s!" Steamille):');
       if (!trigger || !trigger.trim()) return;
+
+      // Validate trigger: only allow alphanumeric characters and !?- symbols
+      if (!/^[a-zA-Z0-9!?-]+$/.test(trigger.trim())) {
+        alert('Virhe: Komento saa sisältää vain kirjaimia, numeroita ja !?- merkkejä');
+        return;
+      }
 
       const name = prompt('Palvelun nimi (esim. "Steam"):');
       if (!name || !name.trim()) return;
