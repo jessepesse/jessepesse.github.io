@@ -67,9 +67,6 @@ All configurations (links, location, theme settings) are saved to your browser's
 * **JavaScript** (ES6+, Async/Await)
 * **Bootstrap 5.3.3** (Grid only, no jQuery dependency)
 * **Line Awesome** (Icons)
-* **FontAwesome 5** (Icons)ync/Await)
-* **Bootstrap 5.3.3** (Grid only, no jQuery dependency)
-* **Line Awesome** (Icons)
 * **FontAwesome 5** (Icons)
 
 ## 📝 Recent Updates
