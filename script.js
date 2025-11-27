@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   var timeSpan = document.getElementById("time");
   var greetingSpan = document.getElementById("greeting");
   var dateSpan = document.getElementById("date");
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
       appData = JSON.parse(JSON.stringify(DEFAULT_CONFIG));
     }
-    
+
     // Migrate old user_location from localStorage if it exists
     const oldLocation = localStorage.getItem('user_location');
     if (oldLocation && !saved) {
@@ -358,7 +358,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const cityInput = document.getElementById('city-input');
     const btnSearchCity = document.getElementById('btn-search-city');
     const btnGps = document.getElementById('btn-gps');
-    
+
     if (btnSearchCity) {
       btnSearchCity.addEventListener('click', () => {
         searchCity(cityInput.value);
@@ -379,7 +379,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const exportBtn = document.getElementById('export-btn');
     const importBtn = document.getElementById('import-btn');
     const resetBtn = document.getElementById('reset-btn');
-    
+
     if (exportBtn) {
       exportBtn.addEventListener('click', exportConfig);
     }
@@ -396,7 +396,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Edit buttons
     document.querySelectorAll('.help-edit-btn').forEach(btn => {
-      btn.addEventListener('click', function(e) {
+      btn.addEventListener('click', function (e) {
         e.preventDefault();
         e.stopPropagation();
         const type = this.dataset.type;
@@ -407,7 +407,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Delete buttons
     document.querySelectorAll('.help-delete-btn').forEach(btn => {
-      btn.addEventListener('click', function(e) {
+      btn.addEventListener('click', function (e) {
         e.preventDefault();
         e.stopPropagation();
         const type = this.dataset.type;
@@ -418,7 +418,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add buttons
     document.querySelectorAll('.help-add-btn').forEach(btn => {
-      btn.addEventListener('click', function(e) {
+      btn.addEventListener('click', function (e) {
         e.preventDefault();
         e.stopPropagation();
         const type = this.dataset.type;
@@ -512,7 +512,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (!name || !name.trim()) return;
 
       const urlInstruction = 'Hae sivustolla sanalla TEST, ja liitä osoite tähän:\n\n' +
-                             'Esim: https://store.steampowered.com/search/?term=TEST';
+        'Esim: https://store.steampowered.com/search/?term=TEST';
       const rawUrl = prompt(urlInstruction);
       if (!rawUrl || !rawUrl.trim()) return;
 
@@ -578,7 +578,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function attachEditListeners() {
     // Edit link buttons
     document.querySelectorAll('.link-edit-btn').forEach(btn => {
-      btn.addEventListener('click', function(e) {
+      btn.addEventListener('click', function (e) {
         e.preventDefault();
         const groupId = this.dataset.group;
         const linkIndex = parseInt(this.dataset.link, 10);
@@ -588,7 +588,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Delete link buttons
     document.querySelectorAll('.link-delete-btn').forEach(btn => {
-      btn.addEventListener('click', function(e) {
+      btn.addEventListener('click', function (e) {
         e.preventDefault();
         const groupId = this.dataset.group;
         const linkIndex = parseInt(this.dataset.link, 10);
@@ -598,7 +598,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Delete group buttons
     document.querySelectorAll('.card-delete-btn').forEach(btn => {
-      btn.addEventListener('click', function(e) {
+      btn.addEventListener('click', function (e) {
         e.preventDefault();
         const groupId = this.dataset.group;
         deleteGroup(groupId);
@@ -607,7 +607,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add link buttons
     document.querySelectorAll('.link-add-btn').forEach(btn => {
-      btn.addEventListener('click', function(e) {
+      btn.addEventListener('click', function (e) {
         e.preventDefault();
         const groupId = this.dataset.group;
         addLink(groupId);
@@ -717,7 +717,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // ==========================================
   // CONFIG MANAGEMENT: IMPORT/EXPORT/RESET
   // ==========================================
-  
+
   function exportConfig() {
     try {
       const json = JSON.stringify(appData, null, 2);
@@ -744,7 +744,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     try {
       const parsed = JSON.parse(input);
-      
+
       // Validate structure
       if (!parsed || typeof parsed !== 'object') {
         throw new Error('Virheellinen JSON-muoto');
@@ -768,7 +768,7 @@ document.addEventListener('DOMContentLoaded', function() {
       saveData();
       renderApp();
       renderHelp();
-      
+
       alert('✅ Asetukset tuotu onnistuneesti!');
     } catch (err) {
       alert('❌ Virhe tuotaessa asetuksia:\n' + err.message);
@@ -796,7 +796,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // ==========================================
   // LOCATION SEARCH (GEOCODING)
   // ==========================================
-  
+
   async function searchCity(query) {
     if (!query || query.trim() === '') {
       alert('❌ Syötä kaupungin nimi');
@@ -806,20 +806,20 @@ document.addEventListener('DOMContentLoaded', function() {
     try {
       const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=1&language=fi&format=json`;
       const response = await fetch(url);
-      
+
       if (!response.ok) {
         throw new Error('Geocoding API error');
       }
 
       const data = await response.json();
-      
+
       if (!data.results || data.results.length === 0) {
         alert('❌ Kaupunkia ei löytynyt. Yritä uudestaan.');
         return;
       }
 
       const result = data.results[0];
-      
+
       // Update appData location
       appData.location = {
         lat: result.latitude,
@@ -827,20 +827,20 @@ document.addEventListener('DOMContentLoaded', function() {
         name: result.name,
         country: result.country_code || result.country || 'N/A'
       };
-      
+
       saveData();
-      
+
       // Fetch weather for new location
       await fetchWeather(appData.location.lat, appData.location.lon);
-      
+
       console.log('Sijainti päivitetty:', appData.location);
-      
+
       // Clear input
       const cityInput = document.getElementById('city-input');
       if (cityInput) {
         cityInput.value = '';
       }
-      
+
     } catch (error) {
       console.error('City search error:', error);
       alert('❌ Virhe haettaessa kaupunkia: ' + error.message);
@@ -859,21 +859,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     navigator.geolocation.getCurrentPosition(
-      async function(pos) {
+      async function (pos) {
         const lat = pos.coords.latitude;
         const lon = pos.coords.longitude;
-        
+
         try {
           // Reverse geocoding: find nearest city from coordinates
           const url = `https://geocoding-api.open-meteo.com/v1/search?latitude=${lat}&longitude=${lon}&count=1&language=fi&format=json`;
           const response = await fetch(url);
-          
+
           if (!response.ok) {
             throw new Error('Reverse geocoding failed');
           }
-          
+
           const data = await response.json();
-          
+
           // Update location with city name if found, otherwise use coordinates
           if (data.results && data.results.length > 0) {
             const result = data.results[0];
@@ -892,12 +892,12 @@ document.addEventListener('DOMContentLoaded', function() {
               country: 'GPS'
             };
           }
-          
+
           saveData();
           await fetchWeather(appData.location.lat, appData.location.lon);
-          
+
           console.log('GPS-sijainti päivitetty:', appData.location);
-          
+
         } catch (error) {
           console.error('Reverse geocoding error:', error);
           // Fallback: save coordinates even if reverse geocoding fails
@@ -910,12 +910,12 @@ document.addEventListener('DOMContentLoaded', function() {
           saveData();
           await fetchWeather(appData.location.lat, appData.location.lon);
         }
-        
+
         if (btnGps) {
           btnGps.style.opacity = '1';
         }
       },
-      function(error) {
+      function (error) {
         console.error('GPS error:', error);
         if (btnGps) {
           btnGps.style.opacity = '1';
@@ -974,7 +974,7 @@ document.addEventListener('DOMContentLoaded', function() {
   setInterval(updateClock, 1000);
 
   // Listen for keydown events
-  document.addEventListener('keydown', function(event) {
+  document.addEventListener('keydown', function (event) {
     // Disable shortcuts if edit mode is active
     if (document.body.classList.contains('editing')) {
       return;
@@ -1090,9 +1090,9 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       // Format output: "X°C (Tuntuu kuin Y°) Tuulen nopeus on Z m/s"
-      weatherTextEl.innerHTML = 
-        '<span class="weather-temp">' + temp + '°C</span> ' +
-        '<span class="weather-details">(Tuntuu kuin ' + feelsLike + '°) Tuulen nopeus on ' + windSpeed + ' m/s</span>';
+      weatherTextEl.innerHTML =
+        '<span class="weather-temp">' + escapeHtml(String(temp)) + '°C</span> ' +
+        '<span class="weather-details">(Tuntuu kuin ' + escapeHtml(String(feelsLike)) + '°) Tuulen nopeus on ' + escapeHtml(String(windSpeed)) + ' m/s</span>';
 
       // ==========================================
       // FORECAST LOGIC (Next 6 hours)
@@ -1134,7 +1134,7 @@ document.addEventListener('DOMContentLoaded', function() {
         weatherForecastEl.textContent = '';
       }
     }
-    
+
     // Update location display
     updateLocationDisplay();
   }
@@ -1158,7 +1158,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     navigator.geolocation.getCurrentPosition(
-      function(pos) {
+      function (pos) {
         const newLat = pos.coords.latitude;
         const newLon = pos.coords.longitude;
 
@@ -1180,7 +1180,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         console.log('Sijainti päivitetty GPS:llä:', newLat, newLon);
       },
-      function(error) {
+      function (error) {
         console.error('Geolocation error:', error);
         if (locationBtn) {
           locationBtn.classList.remove('updating');
