@@ -108,12 +108,14 @@ document.addEventListener('DOMContentLoaded', function () {
             if (focusBtn) {
                 focusBtn.querySelector('i').className = 'las la-eye-slash';
                 focusBtn.title = 'Exit Focus Mode';
+                focusBtn.setAttribute('aria-pressed', 'true');
             }
         } else {
             document.body.classList.remove('focus-mode');
             if (focusBtn) {
                 focusBtn.querySelector('i').className = 'las la-eye';
                 focusBtn.title = 'Focus Mode';
+                focusBtn.setAttribute('aria-pressed', 'false');
             }
         }
         localStorage.setItem(FOCUS_KEY, enabled ? 'true' : 'false');

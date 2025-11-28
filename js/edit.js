@@ -33,6 +33,7 @@ export function toggleEditMode(renderHelp) {
             if (editBtn) {
                 editBtn.querySelector('i').className = 'las la-cog';
                 editBtn.title = 'Muokkaa linkkejä';
+                editBtn.setAttribute('aria-pressed', 'false');
             }
             renderHelp();
 
@@ -51,6 +52,7 @@ export function toggleEditMode(renderHelp) {
         if (editBtn) {
             editBtn.querySelector('i').className = 'las la-check';
             editBtn.title = 'Lopeta muokkaus';
+            editBtn.setAttribute('aria-pressed', 'true');
         }
         renderHelp();
     }

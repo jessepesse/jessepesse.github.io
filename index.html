@@ -17,14 +17,19 @@
 </head>
 
 <body>
-  <!-- Focus Mode Toggle Button -->
-  <button id="focus-btn" class="focus-btn" type="button" aria-label="Focus Mode" title="Focus Mode">
-    <i class="las la-eye"></i>
-  </button>
+  <!-- Skip to content link for accessibility -->
+  <a href="#main-content" class="skip-link">Siirry sisältöön</a>
 
   <!-- Edit Mode Toggle Button -->
-  <button id="edit-btn" class="edit-btn" type="button" aria-label="Edit Mode" title="Muokkaa linkkejä">
+  <button id="edit-btn" class="edit-btn" type="button" aria-label="Edit Mode" title="Muokkaa linkkejä"
+    aria-pressed="false">
     <i class="las la-cog"></i>
+  </button>
+
+  <!-- Focus Mode Toggle Button -->
+  <button id="focus-btn" class="focus-btn" type="button" aria-label="Focus Mode" title="Focus Mode"
+    aria-pressed="false">
+    <i class="las la-eye"></i>
   </button>
 
   <main class="site-main">
@@ -58,8 +63,8 @@
       </div>
     </header>
 
-    <!-- LINKS SECTION: Dynamic cards container -->
-    <section class="links-section">
+    <!-- LINKS SECTION: Dynamic link cards -->
+    <div id="main-content" class="links-section">
       <div class="container-fluid">
         <div id="card-container" class="row justify-content-center">
           <!-- Cards rendered dynamically by JS -->
@@ -71,7 +76,7 @@
           </button>
         </div>
       </div>
-    </section>
+      </section>
   </main>
 
   <!-- Help / Cheat Sheet Widget -->
