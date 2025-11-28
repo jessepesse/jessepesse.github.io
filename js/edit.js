@@ -12,6 +12,9 @@ import { processSearchUrl } from './search.js';
  * @param {Function} renderHelp - Callback to re-render help
  */
 export function toggleEditMode(renderHelp) {
+    const EDIT_MODE_SLIDE_OUT_DELAY = 10;      // ms - Small delay to show slide-out animation
+    const EDIT_MODE_CLEANUP_DELAY = 50;        // ms - Delay before cleaning up inline styles
+
     const wasEditing = document.body.classList.contains('editing');
     const helpBox = document.querySelector('.help-box');
 
@@ -38,9 +41,9 @@ export function toggleEditMode(renderHelp) {
                 setTimeout(() => {
                     helpBox.style.transform = '';
                     helpBox.style.pointerEvents = '';
-                }, 50);
+                }, EDIT_MODE_CLEANUP_DELAY);
             }
-        }, 10);
+        }, EDIT_MODE_SLIDE_OUT_DELAY);
     } else {
         // Entering edit mode - toggle first, then render
         document.body.classList.add('editing');
@@ -442,4 +445,11 @@ export function initEditMode(renderHelp, renderApp) {
     if (addGroupBtn) {
         addGroupBtn.addEventListener('click', () => addGroup(renderApp));
     }
+
+    // Add Escape key listener to close edit mode
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && document.body.classList.contains('editing')) {
+            toggleEditMode(renderHelp);
+        }
+    });
 }

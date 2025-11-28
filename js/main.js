@@ -92,7 +92,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     updateClock(); // Show time immediately on load
-    setInterval(updateClock, 1000);
+
+    const CLOCK_UPDATE_INTERVAL = 1000; // 1 second in milliseconds
+    setInterval(updateClock, CLOCK_UPDATE_INTERVAL);
 
     // ==========================================
     // FOCUS MODE

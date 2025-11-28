@@ -146,7 +146,11 @@ export function getNameFromUrl(url) {
  * @returns {string} Unique ID
  */
 export function generateId() {
-    return 'group_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    const ID_RADIX = 36;           // Base-36: numbers (0-9) and letters (a-z)
+    const ID_PREFIX_SKIP = 2;      // Skip "0." prefix from Math.random()
+    const ID_RANDOM_LENGTH = 9;    // Length of random string portion
+
+    return 'group_' + Date.now() + '_' + Math.random().toString(ID_RADIX).substr(ID_PREFIX_SKIP, ID_RANDOM_LENGTH);
 }
 
 /**

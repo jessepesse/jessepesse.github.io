@@ -346,6 +346,8 @@ function updateLocation() {
  * Initialize weather widget
  */
 export function initWeather() {
+    const WEATHER_UPDATE_INTERVAL = 30 * 60 * 1000; // 30 minutes in milliseconds
+
     const weatherWidget = document.getElementById('weather-widget');
     const weatherTextEl = document.getElementById('weather-text');
     const locationBtn = document.getElementById('location-btn');
@@ -358,7 +360,7 @@ export function initWeather() {
     // Run on load and refresh every 30 minutes
     if (weatherWidget && weatherTextEl) {
         updateWeather();
-        setInterval(updateWeather, 30 * 60 * 1000);
+        setInterval(updateWeather, WEATHER_UPDATE_INTERVAL);
     }
 
     // Update location display
