@@ -91,9 +91,13 @@ export async function useGPSLocation(fetchWeather) {
             const appData = getAppData();
 
             try {
-                // Reverse geocoding: find nearest city from coordinates
-                const url = `https://geocoding-api.open-meteo.com/v1/search?latitude=${lat}&longitude=${lon}&count=1&language=fi&format=json`;
-                const response = await fetch(url);
+                // Reverse geocoding using Nominatim (OpenStreetMap)
+                const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&accept-language=fi`;
+                const response = await fetch(url, {
+                    headers: {
+                        'User-Agent': 'Startpage-Weather-Widget'
+                    }
+                });
 
                 if (!response.ok) {
                     throw new Error('Reverse geocoding failed');
@@ -101,14 +105,17 @@ export async function useGPSLocation(fetchWeather) {
 
                 const data = await response.json();
 
-                // Update location with city name if found, otherwise use coordinates
-                if (data.results && data.results.length > 0) {
-                    const result = data.results[0];
+                // Extract city name from address
+                const address = data.address || {};
+                const city = address.city || address.town || address.village || address.municipality || null;
+                const country = address.country_code ? address.country_code.toUpperCase() : 'N/A';
+
+                if (city) {
                     appData.location = {
                         lat: lat,
                         lon: lon,
-                        name: result.name,
-                        country: result.country_code || result.country || 'N/A'
+                        name: city,
+                        country: country
                     };
                 } else {
                     // Fallback: use formatted coordinates
@@ -306,27 +313,68 @@ function updateLocation() {
 
     const appData = getAppData();
     navigator.geolocation.getCurrentPosition(
-        function (pos) {
+        async function (pos) {
             const newLat = pos.coords.latitude;
             const newLon = pos.coords.longitude;
 
-            // Update appData location
-            appData.location = {
-                lat: newLat,
-                lon: newLon,
-                name: 'GPS',
-                country: 'LOC'
-            };
-            saveData();
+            try {
+                // Reverse geocoding using Nominatim (OpenStreetMap)
+                const url = `https://nominatim.openstreetmap.org/reverse?lat=${newLat}&lon=${newLon}&format=json&accept-language=fi`;
+                const response = await fetch(url, {
+                    headers: {
+                        'User-Agent': 'Startpage-Weather-Widget'
+                    }
+                });
 
-            // Fetch weather with new location
-            fetchWeather(newLat, newLon);
+                if (!response.ok) {
+                    throw new Error('Reverse geocoding failed');
+                }
+
+                const data = await response.json();
+
+                // Extract city name from address
+                const address = data.address || {};
+                const city = address.city || address.town || address.village || address.municipality || null;
+                const country = address.country_code ? address.country_code.toUpperCase() : 'N/A';
+
+                if (city) {
+                    appData.location = {
+                        lat: newLat,
+                        lon: newLon,
+                        name: city,
+                        country: country
+                    };
+                } else {
+                    // Fallback: use formatted coordinates
+                    appData.location = {
+                        lat: newLat,
+                        lon: newLon,
+                        name: `${newLat.toFixed(2)}°N, ${newLon.toFixed(2)}°E`,
+                        country: 'GPS'
+                    };
+                }
+
+                saveData();
+                await fetchWeather(newLat, newLon);
+
+                console.log('Sijainti päivitetty GPS:llä:', appData.location);
+
+            } catch (error) {
+                console.error('Reverse geocoding error:', error);
+                // Fallback: save coordinates even if reverse geocoding fails
+                appData.location = {
+                    lat: newLat,
+                    lon: newLon,
+                    name: `${newLat.toFixed(2)}°N, ${newLon.toFixed(2)}°E`,
+                    country: 'GPS'
+                };
+                saveData();
+                await fetchWeather(newLat, newLon);
+            }
 
             if (locationBtn) {
                 locationBtn.classList.remove('updating');
             }
-
-            console.log('Sijainti päivitetty GPS:llä:', newLat, newLon);
         },
         function (error) {
             console.error('Geolocation error:', error);

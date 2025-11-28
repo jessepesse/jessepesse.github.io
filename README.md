@@ -30,6 +30,7 @@ A high-performance, aesthetically pleasing browser startpage designed for power 
 ### Weather Widget ⛅
 
 * **Data Source:** Powered by the [Open-Meteo API](https://open-meteo.com/) (No API keys required).
+* **Reverse Geocoding:** Uses [OpenStreetMap Nominatim API](https://nominatim.openstreetmap.org/) to convert GPS coordinates to city names.
 * **Features:**
   * Current temperature, "Feels like" temp, and wind speed.
   * **Rain/Snow Forecast:** Warns if precipitation is expected in the next 6 hours.
@@ -52,7 +53,7 @@ The startpage is designed to be fully configurable directly from the UI, without
 2. **Settings Panel (in Sidebar):**
    * Appears only in Edit Mode as part of the unified right sidebar.
    * **Location Search:** Type a city name to set the weather location manually, powered by Open-Meteo Geocoding API.
-   * **GPS Support:** Use your device's GPS to automatically detect and set your location with reverse geocoding (shows city name, not coordinates).
+   * **GPS Support:** Use your device's GPS to automatically detect and set your location. City names are resolved using OpenStreetMap Nominatim reverse geocoding.
    * **Import/Export:** Save your configuration to a JSON file (clipboard) to sync between devices.
    * **Reset:** Restore factory defaults with one click.
 
@@ -76,6 +77,6 @@ All configurations (links, location, theme settings) are saved to your browser's
 * **Bootstrap 5 Migration:** Upgraded from Bootstrap 4.4.1 to 5.3.3, removed jQuery dependency.
 * **Edit Functionality:** Added ✏️ edit buttons for links, search bangs, and keyboard shortcuts. No need to delete and recreate items to fix typos.
 * **Unified Sidebar:** Consolidated settings into a full-height right sidebar with smooth slide animation and push layout.
-* **Reverse Geocoding:** GPS location now displays city names (e.g., "Oulu, FI") instead of generic "GPS, LOC" by querying Open-Meteo Geocoding API.
+* **Reverse Geocoding:** GPS location now displays city names (e.g., "Oulu, FI") instead of generic "GPS, LOC" using OpenStreetMap Nominatim API.
 * **Improved UX:** Sidebar slides in/out smoothly with `translateX` animation. Close button (✖) added for intuitive dismissal.
 * **Hover Help:** Question mark icon in bottom-right reveals help panel on hover (only when not in Edit Mode).
