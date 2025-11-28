@@ -10,6 +10,14 @@ import { getAppData, saveData } from './storage.js';
 const defaultLoc = { lat: 65.0124, lon: 25.4682 };
 
 // ==========================================
+// GEOCODING CACHE
+// ==========================================
+
+const GEOCODING_CACHE = new Map();
+const REVERSE_GEOCODING_CACHE = new Map();
+const CACHE_DURATION = 3600000; // 1 hour in milliseconds
+
+// ==========================================
 // GEOCODING FUNCTIONS
 // ==========================================
 
@@ -21,6 +29,25 @@ const defaultLoc = { lat: 65.0124, lon: 25.4682 };
 export async function searchCity(query, fetchWeather) {
     if (!query || query.trim() === '') {
         alert('❌ Syötä kaupungin nimi');
+        return;
+    }
+
+    const normalizedQuery = query.trim().toLowerCase();
+
+    // Check cache first
+    const cached = GEOCODING_CACHE.get(normalizedQuery);
+    if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
+        console.log('Using cached geocoding result for:', normalizedQuery);
+        const appData = getAppData();
+        appData.location = cached.data;
+        saveData();
+        await fetchWeather(cached.data.lat, cached.data.lon);
+
+        // Clear input
+        const cityInput = document.getElementById('city-input');
+        if (cityInput) {
+            cityInput.value = '';
+        }
         return;
     }
 
@@ -43,14 +70,22 @@ export async function searchCity(query, fetchWeather) {
         const appData = getAppData();
 
         // Update appData location
-        appData.location = {
+        const locationData = {
             lat: result.latitude,
             lon: result.longitude,
             name: result.name,
             country: result.country_code || result.country || 'N/A'
         };
 
+        appData.location = locationData;
         saveData();
+
+        // Cache the result
+        GEOCODING_CACHE.set(normalizedQuery, {
+            data: locationData,
+            timestamp: Date.now()
+        });
+        console.log('Cached geocoding result for:', normalizedQuery);
 
         // Fetch weather for new location
         await fetchWeather(appData.location.lat, appData.location.lon);
@@ -90,6 +125,23 @@ export async function useGPSLocation(fetchWeather) {
             const lon = pos.coords.longitude;
             const appData = getAppData();
 
+            // Create cache key from rounded coordinates (avoid cache misses from tiny GPS variations)
+            const cacheKey = `${lat.toFixed(3)},${lon.toFixed(3)}`;
+
+            // Check cache first
+            const cached = REVERSE_GEOCODING_CACHE.get(cacheKey);
+            if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
+                console.log('Using cached reverse geocoding result for:', cacheKey);
+                appData.location = { ...cached.data, lat, lon }; // Use exact coordinates, cached city name
+                saveData();
+                await fetchWeather(lat, lon);
+
+                if (btnGps) {
+                    btnGps.style.opacity = '1';
+                }
+                return;
+            }
+
             try {
                 // Reverse geocoding using Nominatim (OpenStreetMap)
                 const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&accept-language=fi`;
@@ -110,8 +162,9 @@ export async function useGPSLocation(fetchWeather) {
                 const city = address.city || address.town || address.village || address.municipality || null;
                 const country = address.country_code ? address.country_code.toUpperCase() : 'N/A';
 
+                let locationData;
                 if (city) {
-                    appData.location = {
+                    locationData = {
                         lat: lat,
                         lon: lon,
                         name: city,
@@ -119,7 +172,7 @@ export async function useGPSLocation(fetchWeather) {
                     };
                 } else {
                     // Fallback: use formatted coordinates
-                    appData.location = {
+                    locationData = {
                         lat: lat,
                         lon: lon,
                         name: `${lat.toFixed(2)}°N, ${lon.toFixed(2)}°E`,
@@ -127,8 +180,17 @@ export async function useGPSLocation(fetchWeather) {
                     };
                 }
 
+                appData.location = locationData;
                 saveData();
-                await fetchWeather(appData.location.lat, appData.location.lon);
+
+                // Cache the result (without exact coordinates in cached data)
+                REVERSE_GEOCODING_CACHE.set(cacheKey, {
+                    data: { name: locationData.name, country: locationData.country },
+                    timestamp: Date.now()
+                });
+                console.log('Cached reverse geocoding result for:', cacheKey);
+
+                await fetchWeather(lat, lon);
 
                 console.log('GPS-sijainti päivitetty:', appData.location);
 
@@ -142,7 +204,7 @@ export async function useGPSLocation(fetchWeather) {
                     country: 'GPS'
                 };
                 saveData();
-                await fetchWeather(appData.location.lat, appData.location.lon);
+                await fetchWeather(lat, lon);
             }
 
             if (btnGps) {
@@ -317,6 +379,23 @@ function updateLocation() {
             const newLat = pos.coords.latitude;
             const newLon = pos.coords.longitude;
 
+            // Create cache key from rounded coordinates
+            const cacheKey = `${newLat.toFixed(3)},${newLon.toFixed(3)}`;
+
+            // Check cache first
+            const cached = REVERSE_GEOCODING_CACHE.get(cacheKey);
+            if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
+                console.log('Using cached reverse geocoding result for:', cacheKey);
+                appData.location = { ...cached.data, lat: newLat, lon: newLon };
+                saveData();
+                await fetchWeather(newLat, newLon);
+
+                if (locationBtn) {
+                    locationBtn.classList.remove('updating');
+                }
+                return;
+            }
+
             try {
                 // Reverse geocoding using Nominatim (OpenStreetMap)
                 const url = `https://nominatim.openstreetmap.org/reverse?lat=${newLat}&lon=${newLon}&format=json&accept-language=fi`;
@@ -337,8 +416,9 @@ function updateLocation() {
                 const city = address.city || address.town || address.village || address.municipality || null;
                 const country = address.country_code ? address.country_code.toUpperCase() : 'N/A';
 
+                let locationData;
                 if (city) {
-                    appData.location = {
+                    locationData = {
                         lat: newLat,
                         lon: newLon,
                         name: city,
@@ -346,7 +426,7 @@ function updateLocation() {
                     };
                 } else {
                     // Fallback: use formatted coordinates
-                    appData.location = {
+                    locationData = {
                         lat: newLat,
                         lon: newLon,
                         name: `${newLat.toFixed(2)}°N, ${newLon.toFixed(2)}°E`,
@@ -354,7 +434,16 @@ function updateLocation() {
                     };
                 }
 
+                appData.location = locationData;
                 saveData();
+
+                // Cache the result
+                REVERSE_GEOCODING_CACHE.set(cacheKey, {
+                    data: { name: locationData.name, country: locationData.country },
+                    timestamp: Date.now()
+                });
+                console.log('Cached reverse geocoding result for:', cacheKey);
+
                 await fetchWeather(newLat, newLon);
 
                 console.log('Sijainti päivitetty GPS:llä:', appData.location);
