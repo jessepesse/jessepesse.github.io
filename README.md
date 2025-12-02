@@ -279,7 +279,7 @@ Contributions are welcome! Here's how you can help:
 
 ```bash
 # 1. Fork and clone
-git clone https://github.com/YOUR_USERNAME/jessepesse.github.io.git
+git clone https://github.com/jessepesse/jessepesse.github.io.git
 cd jessepesse.github.io
 
 # 2. Create a branch
@@ -318,9 +318,8 @@ This project is open source and available for personal use. Feel free to fork an
 
 ## 📞 Contact
 
-**Jesse Pesse**
+**Jessepesse**
 - GitHub: [@jessepesse](https://github.com/jessepesse)
-- Website: [jessepesse.github.io](https://jessepesse.github.io)
 
 ---
 
