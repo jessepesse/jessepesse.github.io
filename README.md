@@ -80,3 +80,249 @@ All configurations (links, location, theme settings) are saved to your browser's
 * **Reverse Geocoding:** GPS location now displays city names (e.g., "Oulu, FI") instead of generic "GPS, LOC" using OpenStreetMap Nominatim API.
 * **Improved UX:** Sidebar slides in/out smoothly with `translateX` animation. Close button (✖) added for intuitive dismissal.
 * **Hover Help:** Question mark icon in bottom-right reveals help panel on hover (only when not in Edit Mode).
+* **Drag & Drop:** Reorder groups and links by dragging in edit mode for easy customization.
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Modern web browser (Chrome, Firefox, Edge, Safari)
+- Local web server for development (Python, Node.js, or similar)
+- Git for version control
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/jessepesse/jessepesse.github.io.git
+   cd jessepesse.github.io
+   ```
+
+2. **Start a local server**
+
+   **Option A: Python** (easiest)
+   ```bash
+   python3 -m http.server 8000
+   ```
+
+   **Option B: Node.js**
+   ```bash
+   npx serve
+   ```
+
+   **Option C: VS Code Live Server**
+   - Install "Live Server" extension
+   - Right-click `index.html` → "Open with Live Server"
+
+3. **Open in browser**
+   ```
+   http://localhost:8000
+   ```
+
+> **⚠️ Important:** ES6 modules require a web server. Opening `index.html` directly (file://) will not work due to CORS restrictions.
+
+---
+
+## 👨‍💻 Development
+
+### Project Structure
+
+```
+jessepesse.github.io/
+├── index.html          # Main HTML file
+├── styles.css          # All CSS styles
+├── js/
+│   ├── main.js         # Entry point, initialization
+│   ├── config.js       # Constants, defaults, utility functions
+│   ├── storage.js      # localStorage management
+│   ├── rendering.js    # DOM rendering logic
+│   ├── search.js       # Smart search and bangs
+│   ├── edit.js         # Edit mode functionality
+│   ├── help.js         # Help sidebar management
+│   ├── weather.js      # Weather widget + geocoding
+│   └── dragdrop.js     # Drag-and-drop reordering
+└── README.md           # This file
+```
+
+### Module System
+
+The project uses **ES6 modules** for code organization:
+
+- **`main.js`** - Initializes all modules and sets up the app
+- **`config.js`** - Exports constants, default config, utility functions
+- **`storage.js`** - Handles data persistence with localStorage
+- **`rendering.js`** - Renders links and help sidebar
+- **`search.js`** - Processes search queries and bang commands
+- **`edit.js`** - Manages edit mode, link/group CRUD operations
+- **`help.js`** - Manages help items (bangs, shortcuts)
+- **`weather.js`** - Weather widget, geocoding, location management
+- **`dragdrop.js`** - Drag-and-drop reordering for groups and links
+
+### Making Changes
+
+1. **Edit the code** in your preferred editor
+2. **Refresh the browser** (Ctrl+Shift+R for hard refresh)
+3. **Test your changes** in edit mode
+4. **Check the console** for any errors
+
+### Adding a New Feature
+
+Example: Adding a new utility function
+
+1. **Add to appropriate module** (e.g., `config.js`)
+   ```javascript
+   export function myNewFunction() {
+     // Your code
+   }
+   ```
+
+2. **Import where needed**
+   ```javascript
+   import { myNewFunction } from './config.js';
+   ```
+
+3. **Test thoroughly**
+   - Test in normal mode
+   - Test in edit mode
+   - Test on mobile (responsive)
+
+### Debugging
+
+**Browser DevTools:**
+- **Console** (F12) - View errors and logs
+- **Network** - Check API calls (weather, geocoding)
+- **Application → Local Storage** - View saved data
+
+**Common Issues:**
+- Module errors → Check import paths
+- CORS errors → Make sure you're using a web server
+- Data not saving → Check localStorage quota
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Here's how you can help:
+
+### Reporting Bugs
+
+1. **Check existing issues** on GitHub
+2. **Create a new issue** with:
+   - Clear description of the bug
+   - Steps to reproduce
+   - Expected vs actual behavior
+   - Browser and OS information
+   - Screenshots if applicable
+
+### Suggesting Features
+
+1. **Open an issue** with the `enhancement` label
+2. **Describe the feature** clearly
+   - What problem does it solve?
+   - How would it work?
+   - Any examples or mockups?
+
+### Code Contributions
+
+#### Before You Start
+
+- **Fork the repository**
+- **Create a feature branch** (`git checkout -b feature/amazing-feature`)
+- **Make your changes**
+- **Test thoroughly**
+
+#### Code Style Guidelines
+
+**JavaScript:**
+- Use ES6+ features (modules, arrow functions, const/let)
+- Descriptive variable names (`draggedGroupElement` not `dge`)
+- Add JSDoc comments for exported functions
+- Keep functions small and focused
+
+**CSS:**
+- Use CSS variables for colors and spacing
+- Organize by component
+- Comment sections clearly
+- Mobile-first responsive design
+
+**Commits:**
+- Clear, descriptive commit messages
+- Use conventional commits format:
+  ```
+  feat: Add drag-and-drop for links
+  fix: Resolve geocoding cache issue
+  docs: Update README with setup instructions
+  refactor: Extract magic numbers to constants
+  ```
+
+#### Pull Request Process
+
+1. **Update documentation** if needed
+2. **Test your changes** extensively
+   - Desktop browsers (Chrome, Firefox, Edge)
+   - Mobile browsers (iOS Safari, Chrome Android)
+   - Edit mode and normal mode
+   - localStorage persistence
+
+3. **Create a pull request** with:
+   - Clear description of changes
+   - Reference to related issues
+   - Screenshots/GIFs for UI changes
+
+4. **Wait for review**
+   - Address any feedback
+   - Keep the PR focused on one feature/fix
+
+### Development Workflow
+
+```bash
+# 1. Fork and clone
+git clone https://github.com/YOUR_USERNAME/jessepesse.github.io.git
+cd jessepesse.github.io
+
+# 2. Create a branch
+git checkout -b feature/my-feature
+
+# 3. Make changes and test
+python3 -m http.server 8000
+
+# 4. Commit
+git add .
+git commit -m "feat: Add my awesome feature"
+
+# 5. Push
+git push origin feature/my-feature
+
+# 6. Create Pull Request on GitHub
+```
+
+---
+
+## 📄 License
+
+This project is open source and available for personal use. Feel free to fork and modify for your own needs.
+
+---
+
+## 🙏 Acknowledgments
+
+- **Open-Meteo API** - Weather data and forward geocoding
+- **OpenStreetMap Nominatim** - Reverse geocoding
+- **Bootstrap 5** - Grid system
+- **Line Awesome** & **FontAwesome** - Icons
+- **Google Fonts** - Fira Sans typography
+
+---
+
+## 📞 Contact
+
+**Jesse Pesse**
+- GitHub: [@jessepesse](https://github.com/jessepesse)
+- Website: [jessepesse.github.io](https://jessepesse.github.io)
+
+---
+
+*Made with ❤️ and ☕ in Finland*
+
