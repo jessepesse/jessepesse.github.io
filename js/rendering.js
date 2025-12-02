@@ -15,19 +15,20 @@ import { getAppData } from './storage.js';
  * @param {Function} attachEditListeners - Callback to attach edit mode listeners
  */
 export function renderApp(attachEditListeners) {
-    const cardContainer = document.getElementById('card-container');
-    if (!cardContainer) return;
+  const cardContainer = document.getElementById('card-container');
+  if (!cardContainer) return;
 
-    cardContainer.innerHTML = '';
-    const appData = getAppData();
+  cardContainer.innerHTML = '';
+  const appData = getAppData();
 
-    appData.groups.forEach((group) => {
-        const col = document.createElement('div');
-        col.className = 'col-12 col-md-3 mb-3';
-        col.dataset.groupId = group.id;
+  appData.groups.forEach((group) => {
+    const col = document.createElement('div');
+    col.className = 'col-12 col-md-3 mb-3';
+    col.dataset.groupId = group.id;
 
-        const linksHtml = group.links.map((link, linkIndex) => `
+    const linksHtml = group.links.map((link, linkIndex) => `
       <div class="link-row" data-link-index="${linkIndex}">
+        <span class="drag-handle">⋮⋮</span>
         <a class="text-a d-block" href="${escapeHtml(link.url)}" target="_blank">
           <i class="${escapeHtml(link.icon)} pr-2"></i>${escapeHtml(link.name)}
         </a>
@@ -40,15 +41,17 @@ export function renderApp(attachEditListeners) {
       </div>
     `).join('');
 
-        const cardClass = 'card glass h-100';
+    const cardClass = 'card glass h-100';
 
-        col.innerHTML = `
+    col.innerHTML = `
       <div class="${cardClass}">
         <button class="card-delete-btn" data-group="${group.id}" aria-label="Poista ryhmä">
           <i class="las la-times"></i>
         </button>
         <div class="card-body">
-          <div class="square-header">${escapeHtml(group.title)}</div>
+          <div class="square-header">
+            <span class="drag-handle" style="margin-right: 8px;">⋮⋮</span>${escapeHtml(group.title)}
+          </div>
           ${linksHtml}
           <button class="link-add-btn" data-group="${group.id}" aria-label="Lisää linkki">
             <i class="las la-plus"></i> Lisää linkki
@@ -57,13 +60,13 @@ export function renderApp(attachEditListeners) {
       </div>
     `;
 
-        cardContainer.appendChild(col);
-    });
+    cardContainer.appendChild(col);
+  });
 
-    // Attach event listeners if callback provided
-    if (attachEditListeners) {
-        attachEditListeners();
-    }
+  // Attach event listeners if callback provided
+  if (attachEditListeners) {
+    attachEditListeners();
+  }
 }
 
 /**
@@ -71,13 +74,13 @@ export function renderApp(attachEditListeners) {
  * @param {Object} callbacks - Event handler callbacks
  */
 export function renderHelp(callbacks = {}) {
-    const helpBox = document.querySelector('.help-box');
-    if (!helpBox) return;
+  const helpBox = document.querySelector('.help-box');
+  if (!helpBox) return;
 
-    const isEditing = document.body.classList.contains('editing');
-    const appData = getAppData();
+  const isEditing = document.body.classList.contains('editing');
+  const appData = getAppData();
 
-    const bangsHtml = appData.bangs.map((bang, index) => `
+  const bangsHtml = appData.bangs.map((bang, index) => `
     <li>
       <code>${escapeHtml(bang.trigger)}</code> — ${escapeHtml(bang.name)}
       ${isEditing ? `<button class="help-edit-btn" data-type="bang" data-index="${index}" aria-label="Muokkaa">
@@ -89,7 +92,7 @@ export function renderHelp(callbacks = {}) {
     </li>
   `).join('');
 
-    const shortcutsHtml = appData.shortcuts.map((shortcut, index) => `
+  const shortcutsHtml = appData.shortcuts.map((shortcut, index) => `
     <li>
       <code>${escapeHtml(shortcut.key)}</code> — ${escapeHtml(shortcut.name)}
       ${isEditing ? `<button class="help-edit-btn" data-type="shortcut" data-index="${index}" aria-label="Muokkaa">
@@ -101,7 +104,7 @@ export function renderHelp(callbacks = {}) {
     </li>
   `).join('');
 
-    helpBox.innerHTML = `
+  helpBox.innerHTML = `
     ${isEditing ? `<button id="sidebar-close-btn" class="sidebar-close-btn" aria-label="Sulje sivupalkki">
       <i class="las la-times"></i>
     </button>` : ''}
@@ -156,8 +159,8 @@ export function renderHelp(callbacks = {}) {
     </div>
   `;
 
-    // Attach help event listeners if callback provided
-    if (callbacks.attachHelpListeners) {
-        callbacks.attachHelpListeners();
-    }
+  // Attach help event listeners if callback provided
+  if (callbacks.attachHelpListeners) {
+    callbacks.attachHelpListeners();
+  }
 }

@@ -6,6 +6,7 @@
 import { generateId, getIconForUrl, getNameFromUrl } from './config.js';
 import { getAppData, saveData, exportConfig, importConfig, resetConfig } from './storage.js';
 import { processSearchUrl } from './search.js';
+import { initGroupDragDrop, initLinkDragDrop, enableDragDrop, disableDragDrop } from './dragdrop.js';
 
 /**
  * Toggle edit mode on/off
@@ -20,6 +21,9 @@ export function toggleEditMode(renderHelp) {
 
     // If exiting edit mode, hide box first then remove class
     if (wasEditing) {
+        // Disable drag and drop
+        disableDragDrop();
+
         // Explicitly hide the help-box
         if (helpBox) {
             helpBox.style.transform = 'translateX(100%)';
@@ -55,6 +59,11 @@ export function toggleEditMode(renderHelp) {
             editBtn.setAttribute('aria-pressed', 'true');
         }
         renderHelp();
+
+        // Enable drag and drop after render (so elements exist)
+        setTimeout(() => {
+            enableDragDrop(window._renderAppCallback);
+        }, 50);
     }
 }
 
@@ -440,6 +449,9 @@ export function initEditMode(renderHelp, renderApp) {
     const editBtn = document.getElementById('edit-btn');
     const addGroupBtn = document.getElementById('add-group-btn');
 
+    // Store renderApp callback globally for drag-drop
+    window._renderAppCallback = renderApp;
+
     if (editBtn) {
         editBtn.addEventListener('click', () => toggleEditMode(renderHelp));
     }
@@ -447,6 +459,10 @@ export function initEditMode(renderHelp, renderApp) {
     if (addGroupBtn) {
         addGroupBtn.addEventListener('click', () => addGroup(renderApp));
     }
+
+    // Initialize drag and drop event listeners
+    initGroupDragDrop(renderApp);
+    initLinkDragDrop(renderApp);
 
     // Add Escape key listener to close edit mode
     document.addEventListener('keydown', (e) => {

@@ -330,6 +330,23 @@ a {
   background: rgba(255, 255, 255, 0.1);
 }
 
+.link-row {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.link-row .drag-handle {
+  margin-right: 4px;
+  flex-shrink: 0;
+}
+
+.link-row:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
 .location-btn.updating {
   animation: pulse 1s infinite;
 }
@@ -1044,7 +1061,7 @@ body.editing .help-add-btn {
   }
 
   .help-box {
-    width: 180px;
+    width: 280px;
     font-size: 0.8rem;
     padding: 0.75rem;
   }
@@ -1057,4 +1074,76 @@ body.editing .help-add-btn {
     font-size: 0.75rem;
     padding: 1px 4px;
   }
+}
+
+/* ==========================================
+   DRAG AND DROP STYLES
+   ========================================== */
+
+/* Drag handle (only visible in edit mode) */
+.drag-handle {
+  display: none;
+  cursor: grab;
+  color: rgba(255, 255, 255, 0.4);
+  user-select: none;
+  font-weight: bold;
+  transition: color 0.2s ease;
+}
+
+body.editing .drag-handle {
+  display: inline-block;
+}
+
+body.editing .drag-handle:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+body.editing .drag-handle:active {
+  cursor: grabbing;
+  color: var(--accent);
+}
+
+/* Make groups and links draggable only in edit mode */
+body.editing [data-group-id][draggable="true"] {
+  cursor: grab;
+}
+
+body.editing .link-row[draggable="true"] {
+  cursor: grab;
+}
+
+/* Dragging state */
+.dragging {
+  opacity: 0.4;
+  cursor: grabbing !important;
+}
+
+/* Drop zone highlight for groups */
+.drag-over {
+  border: 2px dashed var(--accent);
+  background: rgba(124, 77, 255, 0.1);
+  transform: scale(1.02);
+  transition: all 0.2s ease;
+}
+
+/* Drop zone highlight for links */
+.drag-over-link {
+  border-top: 2px solid var(--accent);
+  padding-top: 4px;
+  margin-top: 4px;
+}
+
+/* Prevent text selection while dragging */
+body.editing .card,
+body.editing .link-row {
+  user-select: none;
+}
+
+/* Smooth transitions for reordering */
+body.editing .col-12 {
+  transition: transform 0.2s ease;
+}
+
+body.editing .link-row {
+  transition: transform 0.2s ease;
 }
