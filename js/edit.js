@@ -8,6 +8,14 @@ import { getAppData, saveData, exportConfig, importConfig, resetConfig } from '.
 import { processSearchUrl } from './search.js';
 import { initGroupDragDrop, initLinkDragDrop, enableDragDrop, disableDragDrop } from './dragdrop.js';
 
+function normalizeUrl(url) {
+    const trimmedUrl = url.trim();
+    if (!trimmedUrl.startsWith('http://') && !trimmedUrl.startsWith('https://')) {
+        return 'https://' + trimmedUrl;
+    }
+    return trimmedUrl;
+}
+
 /**
  * Toggle edit mode on/off
  * @param {Function} renderHelp - Callback to re-render help
@@ -169,10 +177,7 @@ function addLink(groupId, renderApp) {
     if (!url || !url.trim()) return;
 
     const trimmedUrl = url.trim();
-    let finalUrl = trimmedUrl;
-    if (!trimmedUrl.startsWith('http://') && !trimmedUrl.startsWith('https://')) {
-        finalUrl = 'https://' + trimmedUrl;
-    }
+    const finalUrl = normalizeUrl(trimmedUrl);
 
     const autoName = getNameFromUrl(finalUrl);
     const name = prompt('Nimi (jätä tyhjäksi automaattiselle):', autoName) || autoName;
@@ -278,11 +283,7 @@ export function editHelpItem(type, index, renderHelp) {
         const newUrl = prompt('Muokkaa osoitetta:', shortcut.url);
         if (newUrl === null) return; // User cancelled
         if (newUrl.trim()) {
-            let finalUrl = newUrl.trim();
-            if (!finalUrl.startsWith('http://') && !finalUrl.startsWith('https://')) {
-                finalUrl = 'https://' + finalUrl;
-            }
-            shortcut.url = finalUrl;
+            shortcut.url = normalizeUrl(newUrl);
         }
     }
 
@@ -343,7 +344,11 @@ export function addHelpItem(type, renderHelp) {
         const url = prompt('URL:');
         if (!url || !url.trim()) return;
 
-        appData.shortcuts.push({ key: key.trim().toUpperCase(), name: name.trim(), url: url.trim() });
+        appData.shortcuts.push({
+            key: key.trim().toUpperCase(),
+            name: name.trim(),
+            url: normalizeUrl(url)
+        });
     }
 
     saveData();
@@ -392,6 +397,9 @@ export function attachHelpListeners(toggleEditMode, renderHelp, searchCity, useG
     const exportBtn = document.getElementById('export-btn');
     const importBtn = document.getElementById('import-btn');
     const resetBtn = document.getElementById('reset-btn');
+    const defaultSearchSelect = document.getElementById('default-search-select');
+    const customSearchGroup = document.getElementById('custom-search-group');
+    const customSearchInput = document.getElementById('custom-search-input');
 
     if (exportBtn) {
         exportBtn.addEventListener('click', exportConfig);
@@ -400,10 +408,31 @@ export function attachHelpListeners(toggleEditMode, renderHelp, searchCity, useG
         importBtn.addEventListener('click', () => importConfig(renderApp, renderHelp));
     }
     if (resetBtn) {
-        resetBtn.addEventListener('click', () => {
-            if (confirm('Haluatko varmasti palauttaa oletusasetukset? Tämä poistaa kaikki nykyiset ryhmät, linkit ja asetukset.')) {
-                resetConfig(renderApp, renderHelp);
+        resetBtn.addEventListener('click', () => resetConfig(renderApp, renderHelp));
+    }
+    if (defaultSearchSelect) {
+        defaultSearchSelect.addEventListener('change', () => {
+            const appData = getAppData();
+            appData.defaultSearchUrl = defaultSearchSelect.value;
+            if (customSearchGroup) {
+                customSearchGroup.classList.toggle('hidden-search-setting', defaultSearchSelect.value !== '__custom__');
             }
+            saveData();
+        });
+    }
+    if (customSearchInput) {
+        customSearchInput.addEventListener('change', () => {
+            const processedUrl = processSearchUrl(customSearchInput.value.trim());
+            if (!processedUrl) {
+                alert('Virhe: Custom-hakuosoitteen pitää sisältää %s tai TEST hakutermin paikalla.');
+                customSearchInput.value = getAppData().customSearchUrl || '';
+                return;
+            }
+
+            const appData = getAppData();
+            appData.customSearchUrl = processedUrl;
+            saveData();
+            customSearchInput.value = processedUrl;
         });
     }
 

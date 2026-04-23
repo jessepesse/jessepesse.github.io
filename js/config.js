@@ -9,10 +9,20 @@
 
 export const STORAGE_KEY = 'startpage_config';
 export const FOCUS_KEY = 'focus_mode';
+export const CUSTOM_SEARCH_VALUE = '__custom__';
 
 // Finnish weekdays and months for date display
 export const WEEKDAYS_FI = ["sunnuntai", "maanantai", "tiistai", "keskiviikko", "torstai", "perjantai", "lauantai"];
 export const MONTHS_FI = ["tammikuuta", "helmikuuta", "maaliskuuta", "huhtikuuta", "toukokuuta", "kesäkuuta", "heinäkuuta", "elokuuta", "syyskuuta", "lokakuuta", "marraskuuta", "joulukuuta"];
+
+export const SEARCH_ENGINES = [
+    { name: 'Ecosia', url: 'https://www.ecosia.org/search?q=%s' },
+    { name: 'DuckDuckGo', url: 'https://duckduckgo.com/?q=%s' },
+    { name: 'Google', url: 'https://www.google.com/search?q=%s' },
+    { name: 'Startpage', url: 'https://www.startpage.com/search?q=%s' },
+    { name: 'Bing', url: 'https://www.bing.com/search?q=%s' },
+    { name: 'Custom', url: CUSTOM_SEARCH_VALUE }
+];
 
 // ==========================================
 // DEFAULT CONFIGURATION
@@ -72,6 +82,8 @@ export const DEFAULT_CONFIG = {
         { key: 'Y', name: 'YouTube', url: 'https://www.youtube.com' },
         { key: 'G', name: 'Gmail', url: 'https://gmail.com' }
     ],
+    defaultSearchUrl: SEARCH_ENGINES[0].url,
+    customSearchUrl: '',
     location: {
         lat: 65.01,
         lon: 25.47,

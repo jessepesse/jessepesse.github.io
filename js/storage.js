@@ -40,10 +40,7 @@ export function loadData() {
                 saveData(); // Migrate to new format
             } else {
                 appData = parsed;
-                // Ensure location exists
-                if (!appData.location) {
-                    appData.location = DEFAULT_CONFIG.location;
-                }
+                normalizeAppData();
             }
         } catch (error) {
             console.error('Failed to parse saved config:', error);
@@ -154,6 +151,7 @@ export function importConfig(renderApp, renderHelp) {
 
         // Update appData
         appData = parsed;
+        normalizeAppData();
         saveData();
         renderApp();
         renderHelp();
@@ -185,5 +183,34 @@ export function resetConfig(renderApp, renderHelp) {
         localStorage.removeItem('focus_mode');
         alert('✅ Asetukset nollattu. Sivu ladataan uudelleen.');
         location.reload();
+    }
+}
+
+/**
+ * Ensure appData always has the required structure.
+ */
+function normalizeAppData() {
+    if (!Array.isArray(appData.groups)) {
+        appData.groups = JSON.parse(JSON.stringify(DEFAULT_CONFIG.groups));
+    }
+
+    if (!Array.isArray(appData.bangs)) {
+        appData.bangs = JSON.parse(JSON.stringify(DEFAULT_CONFIG.bangs));
+    }
+
+    if (!Array.isArray(appData.shortcuts)) {
+        appData.shortcuts = JSON.parse(JSON.stringify(DEFAULT_CONFIG.shortcuts));
+    }
+
+    if (typeof appData.defaultSearchUrl !== 'string' || !appData.defaultSearchUrl.trim()) {
+        appData.defaultSearchUrl = DEFAULT_CONFIG.defaultSearchUrl;
+    }
+
+    if (typeof appData.customSearchUrl !== 'string') {
+        appData.customSearchUrl = DEFAULT_CONFIG.customSearchUrl;
+    }
+
+    if (!appData.location || typeof appData.location !== 'object') {
+        appData.location = JSON.parse(JSON.stringify(DEFAULT_CONFIG.location));
     }
 }

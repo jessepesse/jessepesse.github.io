@@ -29,7 +29,7 @@ export function initShortcuts() {
         const shortcut = appData.shortcuts.find(s => s.key.toUpperCase() === key);
         if (shortcut) {
             event.preventDefault(); // Prevent default browser behavior
-            window.open(shortcut.url, '_blank'); // Open the URL in a new tab
+            window.open(shortcut.url, '_blank', 'noopener,noreferrer'); // Open the URL in a new tab
         }
     });
 }

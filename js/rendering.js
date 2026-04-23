@@ -3,7 +3,7 @@
  * DOM manipulation and rendering logic
  */
 
-import { escapeHtml } from './config.js';
+import { CUSTOM_SEARCH_VALUE, escapeHtml, SEARCH_ENGINES } from './config.js';
 import { getAppData } from './storage.js';
 
 // ==========================================
@@ -29,7 +29,7 @@ export function renderApp(attachEditListeners) {
     const linksHtml = group.links.map((link, linkIndex) => `
       <div class="link-row" data-link-index="${linkIndex}">
         <span class="drag-handle">⋮⋮</span>
-        <a class="text-a d-block" href="${escapeHtml(link.url)}" target="_blank">
+        <a class="text-a d-block" href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer">
           <i class="${escapeHtml(link.icon)} pr-2"></i>${escapeHtml(link.name)}
         </a>
         <button class="link-edit-btn" data-group="${group.id}" data-link="${linkIndex}" aria-label="Muokkaa linkki">
@@ -79,6 +79,14 @@ export function renderHelp(callbacks = {}) {
 
   const isEditing = document.body.classList.contains('editing');
   const appData = getAppData();
+  const selectedSearchValue = SEARCH_ENGINES.some((engine) => engine.url === appData.defaultSearchUrl)
+    ? appData.defaultSearchUrl
+    : CUSTOM_SEARCH_VALUE;
+  const searchEngineOptions = SEARCH_ENGINES.map((engine) => `
+    <option value="${escapeHtml(engine.url)}" ${selectedSearchValue === engine.url ? 'selected' : ''}>
+      ${escapeHtml(engine.name)}
+    </option>
+  `).join('');
 
   const bangsHtml = appData.bangs.map((bang, index) => `
     <li>
@@ -121,6 +129,23 @@ export function renderHelp(callbacks = {}) {
             <i class="las la-map-marker"></i>
           </button>
         </div>
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="default-search-select">Oletushakukone</label>
+        <select id="default-search-select" class="sidebar-select" aria-label="Valitse oletushakukone">
+          ${searchEngineOptions}
+        </select>
+      </div>
+      <div class="setting-group ${selectedSearchValue === CUSTOM_SEARCH_VALUE ? '' : 'hidden-search-setting'}" id="custom-search-group">
+        <label class="setting-label" for="custom-search-input">Custom-hakuosoite</label>
+        <input
+          type="text"
+          id="custom-search-input"
+          class="sidebar-input"
+          aria-label="Custom-hakuosoite"
+          placeholder="https://searx.example/search?q=%s"
+          value="${escapeHtml(appData.customSearchUrl || '')}">
+        <div class="setting-help-text">Käytä %s tai TEST hakutermin paikalla.</div>
       </div>
       <hr class="sidebar-divider">
       <div class="setting-group">

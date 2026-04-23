@@ -525,11 +525,35 @@ body.editing .sidebar-close-btn {
   transition: all 0.2s ease;
 }
 
+.sidebar-select {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: #fff;
+  font-family: var(--font-main);
+  font-size: 0.85rem;
+  padding: 0.5rem 0.75rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
 .sidebar-input::placeholder {
   color: rgba(255, 255, 255, 0.3);
 }
 
-.sidebar-input:focus {
+.setting-help-text {
+  margin-top: 0.4rem;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.hidden-search-setting {
+  display: none;
+}
+
+.sidebar-input:focus,
+.sidebar-select:focus {
   background: rgba(255, 255, 255, 0.08);
   border-color: var(--accent);
 }

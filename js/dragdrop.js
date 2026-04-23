@@ -354,7 +354,4 @@ export function disableDragDrop() {
     document.querySelectorAll('.link-row').forEach(row => {
         row.removeAttribute('draggable');
     });
-
-    // Clear callback
-    window._renderAppCallback = null;
 }

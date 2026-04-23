@@ -17,6 +17,23 @@ const GEOCODING_CACHE = new Map();
 const REVERSE_GEOCODING_CACHE = new Map();
 const CACHE_DURATION = 3600000; // 1 hour in milliseconds
 
+function getCurrentHourIndex(hourlyTimes) {
+    if (!Array.isArray(hourlyTimes) || hourlyTimes.length === 0) {
+        return 0;
+    }
+
+    const now = Date.now();
+
+    for (let i = 0; i < hourlyTimes.length; i++) {
+        const hourTime = new Date(hourlyTimes[i]).getTime();
+        if (!Number.isNaN(hourTime) && hourTime >= now) {
+            return i;
+        }
+    }
+
+    return Math.max(0, hourlyTimes.length - 1);
+}
+
 // ==========================================
 // GEOCODING FUNCTIONS
 // ==========================================
@@ -309,13 +326,13 @@ export async function fetchWeather(lat, lon) {
         // FORECAST LOGIC (Next 6 hours)
         // ==========================================
         if (weatherForecastEl && hourly) {
-            const currentHour = new Date().getHours();
+            const currentHourIndex = getCurrentHourIndex(hourly.time);
             let maxProbability = 0;
             let totalRain = 0;
             let totalSnow = 0;
 
             // Loop through the next 6 hours
-            for (let i = currentHour; i < currentHour + 6 && i < hourly.precipitation_probability.length; i++) {
+            for (let i = currentHourIndex; i < currentHourIndex + 6 && i < hourly.precipitation_probability.length; i++) {
                 const prob = hourly.precipitation_probability[i] || 0;
                 const rain = (hourly.rain[i] || 0) + (hourly.showers[i] || 0);
                 const snow = hourly.snowfall[i] || 0;
